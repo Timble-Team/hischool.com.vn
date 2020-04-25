@@ -1,0 +1,61 @@
+// == Breakpoints ===
+$breakpoints: (
+  small: 480px,
+  medium: 768px,
+  wide: 960px,
+  large: 1024px,
+  largest: 1280px,
+  super-largest: 1441px
+);
+
+$color: (
+  primary:  #F16B97,
+  primary-hover: #F7A6C1,
+  secondary: #E61E56,
+  accent: #E61A54,
+  danger: #E61A54,
+  black: #000000,
+  black-a: #1D1E1E,
+  white: #ffffff,
+  text-label: #444B55,
+  text-light: #999999,
+  text-menu: #757575,
+  tex-placeholder: #8A8A8A,
+  disabled: #999999,
+  border: #eeeeee,
+  border-item: #d7d7d7,
+  border-1: #5b5b5b,
+  border-2: #999999,
+  badge-1: #F09199,
+  badge-2: #F19072,
+  badge-3: #98D98E,
+  badge-4: #FCD575,
+  badge-5: #F688AF,
+  badge-6: #F4B3C2,
+  badge-7: #CC7EB1,
+  badge-8: #89C3EB,
+  line: #033333,
+  green: #20B146,
+  border-menu: #ee1d71,
+  rgba-pink: rgba(230, 26, 84, 0.7),
+  rgba-pink-light: rgba(230, 26, 84, 0.1),
+  rgba-gray: rgba(117, 117, 117, 0.15),
+  bg-search: #fafafa,
+  bg-comment: #F6F8F9,
+  bg-footer: #333333,
+);
+
+$font-size: (
+  xs:     11px,
+  sm:     13px,
+  normal: 16px,
+  lg:     18px,
+  xl:     20px,
+  xxl:    24px,
+  xxxl:   30px
+);
+
+// $font-family: 'Yu Gothic', 'YuGothic', 'Helvetica Neue', Verdana, 'Meiryo', 'M+ 1p', sans-serif;
+$font-body: '游ゴシック体', '游ゴシック', 'Yu Gothic', 'YuGothic', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', 'Meiryo', 'sans-serif';
+$font-quicksand: 'Quicksand', sans-serif;
+$font-didot: 'Didot', 'Didot LT STD', 'Times New Roman', serif;
