@@ -22,4 +22,9 @@ $ npm run generate
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
 ## Refer library:
+- Jquery
+- Slick
 - Wow.js: https://wowjs.uk/docs.html
+- Vuetify: https://vuetifyjs.com
+- Video plyr: https://plyr.io
+
