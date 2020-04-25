@@ -1,0 +1,128 @@
+name: cdk deploy
+
+on:
+  push:
+    branches:
+      - develop
+    tags:
+      - 'v*'
+jobs:
+  firebase_deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup firebase CLI
+        run: |
+          curl -sL https://firebase.tools | bash
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Setup dependencies
+        run: npm install
+
+      - name: Setup env file
+        run: npm run build:env -- $apiKey $authDomain $databaseURL $projectId $storageBucket $messagingSenderId $appId $measurementId
+        env:
+          apiKey: ${{ secrets.apiKey }}
+          authDomain: ${{ secrets.authDomain }}
+          databaseURL: ${{ secrets.databaseURL }}
+          projectId: ${{ secrets.projectId }}
+          storageBucket: ${{ secrets.storageBucket }}
+          messagingSenderId: ${{ secrets.messagingSenderId }}
+          appId: ${{ secrets.appId }}
+          measurementId: ${{ secrets.measurementId }}
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: STG Identity Check
+        run: aws sts get-caller-identity
+        if: |
+          contains(github.ref, 'refs/heads/master') ||
+          contains(github.ref, 'refs/heads/ver0.9.1')
+        env:
+          AWS_DEFAULT_REGION: 'ap-northeast-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_STG }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_STG }}
+
+      - name: STG CDK Deploy
+        run: npm run cdk:deploy
+        if: |
+          contains(github.ref, 'refs/heads/master') ||
+          contains(github.ref, 'refs/heads/ver0.9.1')
+        env:
+          AWS_DEFAULT_REGION: 'ap-northeast-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_STG }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_STG }}
+          SYSTEM_ENV: 'stg'
+
+      - name: STG Error Notification to Slack
+        if: failure() && (contains(github.ref, 'refs/heads/master') || contains(github.ref, 'refs/heads/ver0.9.1'))
+        uses: bryan-nice/slack-notification@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_STG_API }}
+          SLACK_CHANNEL: '#release-stg-api'
+          SLACK_COLOR: '#cb2431'
+          SLACK_ICON: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png?size=48'
+          SLACK_USERNAME: Github Actions
+          SLACK_TITLE: STG deploy Error
+          SLACK_MESSAGE: STG cdk deploy has been returning error!
+
+      - name: STG Passed Notification to Slack
+        if: success() && (contains(github.ref, 'refs/heads/master') || contains(github.ref, 'refs/heads/ver0.9.1'))
+        uses: bryan-nice/slack-notification@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_STG_API }}
+          SLACK_CHANNEL: '#release-stg-api'
+          SLACK_COLOR: '#3dc105'
+          SLACK_ICON: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png?size=48'
+          SLACK_USERNAME: Github Actions
+          SLACK_TITLE: STG deploy
+          SLACK_MESSAGE: STG cdk deploy result has been returning SUCCESS!
+
+      - name: PRD Identity Check
+        run: aws sts get-caller-identity
+        if: contains(github.ref, 'refs/tags/v')
+        env:
+          AWS_DEFAULT_REGION: 'ap-northeast-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_PRD }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_PRD }}
+
+      - name: PRD CDK Deploy
+        run: npm run cdk:deploy
+        if: contains(github.ref, 'refs/tags/v')
+        env:
+          AWS_DEFAULT_REGION: 'ap-northeast-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_PRD }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_PRD }}
+          SYSTEM_ENV: 'prd'
+
+      - name: PRD Error Notification to Slack
+        if: failure() && contains(github.ref, 'refs/tags/v')
+        uses: bryan-nice/slack-notification@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_PRD_API }}
+          SLACK_CHANNEL: '#release-prd-api'
+          SLACK_COLOR: '#cb2431'
+          SLACK_ICON: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png?size=48'
+          SLACK_USERNAME: Github Actions
+          SLACK_TITLE: PRD deploy Error
+          SLACK_MESSAGE: PRD cdk deploy has been returning error!
+
+      - name: PRD Passed Notification to Slack
+        if: success() && contains(github.ref, 'refs/tags/v')
+        uses: bryan-nice/slack-notification@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_PRD_API }}
+          SLACK_CHANNEL: '#release-prd-api'
+          SLACK_COLOR: '#3dc105'
+          SLACK_ICON: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png?size=48'
+          SLACK_USERNAME: Github Actions
+          SLACK_TITLE: PRD deploy
+          SLACK_MESSAGE: PRD cdk deoloy result has been returning SUCCESS!
