@@ -3,14 +3,14 @@
 TMPFILE="tmpfile"
 SSMTMPFILE="ssmtmpfile"
 
-apiKey=$1
-authDomain=$2
-databaseURL=$3
-projectId=$4
-storageBucket=$5
-messagingSenderId=$6
-appId=$7
-measurementId=$8
+API_KEY=$1
+AUTH_DOMAIN=$2
+DATABASE_URL=$3
+PROJECT_ID=$4
+STORAGE_BUCKET=$5
+MESSAGING_SENDER_ID=$6
+APP_ID=$7
+MEASUREMENT_ID=$8
 
 rm -rf ${TMPFILE} ${SSMTMPFILE} || true
 cp .env.sample ${TMPFILE}
