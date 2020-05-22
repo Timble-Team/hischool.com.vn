@@ -51,4 +51,4 @@ jobs:
             npm run build
             rm -rf tmpfile
             rm -rf ssmtmpfile
-            pm2 start npm --name HiSchoolApp -- start src/server/index.js
+            npm start
