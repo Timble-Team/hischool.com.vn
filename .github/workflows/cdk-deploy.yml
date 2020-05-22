@@ -18,9 +18,6 @@ jobs:
         with:
           node-version: '10.x'
 
-      - name: Setup dependencies
-        run: npm install
-
       - name: Setup env file
         run: bash ./ops/set-env.sh $apiKey $authDomain $databaseURL $projectId $storageBucket $messagingSenderId $appId $measurementId
         env:
@@ -50,5 +47,8 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd ~/SSR/hischool.com.vn
+            run: npm install
             npm run build
+            rm -rf tmpfile
+            rm -rf ssmtmpfile
             pm2 start npm --name HiSchoolApp -- start src/server/index.js
