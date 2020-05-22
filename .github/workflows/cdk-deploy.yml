@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: "./"
-          target: "~/SSR"
+          target: "~/SSR/hischool.com.vn"
 
       - name: ssh script to server
         uses: appleboy/ssh-action@master
