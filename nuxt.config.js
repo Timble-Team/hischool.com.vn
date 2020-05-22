@@ -8,37 +8,32 @@ module.exports = {
   /*
   ** Headers of the page
   */
- polyfill: {
-  features: [
-    {
-      require: 'url-polyfill' // NPM package or require path of file
-    },
-        /*
-            Feature with detect:
-
-            Detection is better because the polyfill will not be
-            loaded, parsed and executed if it's not necessary.
-        */
-        {
-            require: 'intersection-observer',
-            detect: () => 'IntersectionObserver' in window,
-        },
-
-        /*
-            Feature with detect & install:
-
-            Some polyfills require a installation step
-            Hence you could supply a install function which accepts the require result
-        */
-        {
-            require: 'smoothscroll-polyfill',
-
-            // Detection found in source: https://github.com/iamdustan/smoothscroll/blob/master/src/smoothscroll.js
-            detect: () => 'scrollBehavior' in document.documentElement.style && window.__forceSmoothScrollPolyfill__ !== true,
-
-            // Optional install function called client side after the package is required:
-            install: (smoothscroll) => smoothscroll.polyfill()
-        }
+  polyfill: {
+    features: [
+      {
+        require: 'url-polyfill' // NPM package or require path of file
+      },
+      /*
+          Feature with detect:
+          Detection is better because the polyfill will not be
+          loaded, parsed and executed if it's not necessary.
+      */
+      {
+        require: 'intersection-observer',
+        detect: () => 'IntersectionObserver' in window,
+      },
+      /*
+          Feature with detect & install:
+          Some polyfills require a installation step
+          Hence you could supply a install function which accepts the require result
+      */
+      {
+        require: 'smoothscroll-polyfill',
+        // Detection found in source: https://github.com/iamdustan/smoothscroll/blob/master/src/smoothscroll.js
+        detect: () => 'scrollBehavior' in document.documentElement.style && window.__forceSmoothScrollPolyfill__ !== true,
+        // Optional install function called client side after the package is required:
+        install: (smoothscroll) => smoothscroll.polyfill()
+      }
     ]
   },
   build: {
@@ -52,18 +47,18 @@ module.exports = {
     vendor: ['wowjs']
   },
   env: {
-    apiKey: process.env.apiKey,
-    authDomain: process.env.authDomain,
-    databaseURL: process.env.databaseURL,
-    projectId: process.env.projectId,
-    storageBucket: process.env.storageBucket,
-    messagingSenderId: process.env.messagingSenderId,
-    appId: process.env.appId,
-    measurementId: process.env.measurementId
+    // apiKey: process.env.apiKey,
+    // authDomain: process.env.authDomain,
+    // databaseURL: process.env.databaseURL,
+    // projectId: process.env.projectId,
+    // storageBucket: process.env.storageBucket,
+    // messagingSenderId: process.env.messagingSenderId,
+    // appId: process.env.appId,
+    // measurementId: process.env.measurementId
   },
   head: {
-    title: ' Avatar Studio - Event Photography & TVC Films',
-    description: 'Avatar Media has proudly been a leading name of prestige and renown for conscientious media services provided for events in Vietnam.',
+    title: ' Hischool - Kỉ yếu Đà Nẵng - chụp ảnh - quay phim - cho thuê trang phục kỉ yếu',
+    description: 'Hischool là đơn vị bao trọn gói combo chụp ảnh tại Đà Nẵng - Quảng Nam - Huế - các tỉnh miền Trung. Đầy đủ các dịch vụ từ chụp, quay, cho thuê trang phục, phụ kiện, decor thiết kế.',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
@@ -93,16 +88,22 @@ module.exports = {
     '@/middleware/filter',
     '@/plugins/vue-plyr',
     { src: '@/plugins/slick-slide', ssr: false },
-    '@/helpers/services/firebase.js',
+    // '@/helpers/services/firebase.js',
+    { src: '@/plugins/owl-carousel.js', ssr: false }
   ],
   /*
   ** Global CSS
   */
   css: [
+    'bootstrap/dist/css/bootstrap.min.css',
     'slick-carousel/slick/slick.css',
     'plyr/dist/plyr.css',
     'animate.css/animate.min.css',
-    '@/assets/styling/styles.scss'
+    '@/assets/css/plugins.css',
+    '@/assets/css/style.css',
+    '@/assets/css/templete.css',
+    '@/assets/css/skin/skin-1.css',
+    '@/assets/css/style.scss'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -115,8 +116,45 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/style-resources',
-    'nuxt-polyfill'
+    'nuxt-polyfill',
+    '@nuxtjs/firebase',
   ],
+  firebase: {
+    config: {
+      apiKey: process.env.apiKey,
+      authDomain: process.env.authDomain,
+      databaseURL: process.env.databaseURL,
+      projectId: process.env.projectId,
+      storageBucket: process.env.storageBucket,
+      messagingSenderId: process.env.messagingSenderId,
+      appId: process.env.appId,
+      measurementId: process.env.measurementId
+      // apiKey: 'AIzaSyDiDRg8T5o1lR5RJdspNpuB10W-zpgrFv0',
+      // authDomain: 'prod-hischool.firebaseapp.com',
+      // databaseURL: 'https://prod-hischool.firebaseio.com',
+      // projectId: 'prod-hischool',
+      // storageBucket: 'prod-hischool.appspot.com',
+      // messagingSenderId: '591828393672',
+      // appId: '1:591828393672:web:69ee94c39a85b400108ffd',
+      // measurementId:'G-E1QHH6HHQ8'
+      // pm2 start npm --name MyAppName -- start
+    },
+    services: {
+      firestore: true,
+      remoteConfig: {
+        settings: {
+          fetchTimeoutMillis: 60000, // Default
+          minimumFetchIntervalMillis: 43200000 // Default
+        },
+        defaultConfig: {
+          welcome_message: "Welcome"
+        }
+      },
+      messaging: {
+        createServiceWorker: true
+      }
+    }
+  },
   /*
   ** Build configuration
   */
@@ -130,3 +168,6 @@ module.exports = {
     }
   }
 }
+
+
+// import 'bootstrap'

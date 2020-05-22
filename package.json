@@ -22,7 +22,12 @@
     "deploy": "firebase deploy --only functions,hosting"
   },
   "dependencies": {
+    "@nuxtjs/firebase": "^5.2.0",
+    "add": "^2.0.6",
     "animate.css": "^3.7.2",
+    "animated-number-vue": "^1.0.0",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
     "cross-env": "^5.2.0",
     "date-fns": "^2.12.0",
     "dotenv": "^8.2.0",
