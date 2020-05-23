@@ -15,4 +15,3 @@ else
   printf "${GREEN}Restart app!${NC}\n"
   pm2 restart hischool-app
 fi
-printf "${GREEN}App running!${NC}\n"

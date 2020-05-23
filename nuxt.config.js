@@ -88,7 +88,6 @@ module.exports = {
     '@/middleware/filter',
     '@/plugins/vue-plyr',
     { src: '@/plugins/slick-slide', ssr: false },
-    // '@/helpers/services/firebase.js',
     { src: '@/plugins/owl-carousel.js', ssr: false }
   ],
   /*
@@ -129,15 +128,6 @@ module.exports = {
       messagingSenderId: process.env.messagingSenderId,
       appId: process.env.appId,
       measurementId: process.env.measurementId
-      // apiKey: 'AIzaSyDiDRg8T5o1lR5RJdspNpuB10W-zpgrFv0',
-      // authDomain: 'prod-hischool.firebaseapp.com',
-      // databaseURL: 'https://prod-hischool.firebaseio.com',
-      // projectId: 'prod-hischool',
-      // storageBucket: 'prod-hischool.appspot.com',
-      // messagingSenderId: '591828393672',
-      // appId: '1:591828393672:web:69ee94c39a85b400108ffd',
-      // measurementId:'G-E1QHH6HHQ8'
-      // pm2 start npm --name MyAppName -- start
     },
     services: {
       firestore: true,
