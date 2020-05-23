@@ -48,11 +48,15 @@ jobs:
           script: |
             cd ~/SSR/hischool.com.vn
             npm install
+            echo Build Packages successful!
             npm run build
+            echo Build Code successful!
             rm -rf tmpfile
             rm -rf ssmtmpfile
+            echo Clean uneccessary files!
             if [ "$(pm2 id hischool-app) "= "[]" ]; then
               pm2 start npm --name hischool-app -- start src/server/index.js
             else
               pm2 restart hischool-app
             fi
+            echo App run!
