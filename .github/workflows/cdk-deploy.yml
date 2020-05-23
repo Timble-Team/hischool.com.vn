@@ -51,4 +51,8 @@ jobs:
             npm run build
             rm -rf tmpfile
             rm -rf ssmtmpfile
-            npm start
+            if [ "$(pm2 id hischool-app) "= "[]" ]; then
+              pm2 start npm --name hischool-app -- start src/server/index.js
+            else
+              pm2 restart hischool-app
+            fi
