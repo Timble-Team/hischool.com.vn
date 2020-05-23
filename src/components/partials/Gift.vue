@@ -1,7 +1,7 @@
 <template>
   <div class="gift">
     <div>
-      <i :class="[icon1, icon2]" :style="{'color': colorArr[Math.floor(Math.random()*colorArr.length)]}" aria-hidden="true"></i>
+      <i :class="[icon1, icon2]" :style="{'color': colorArr[this.type]}" aria-hidden="true"></i>
     </div>
     <div>
       <span class="bold-text">{{keyword}}</span><br>
@@ -11,10 +11,10 @@
 </template>
 <script>
 export default {
-  props: ['keyword', 'content', 'icon'],
+  props: ['keyword', 'content', 'icon', 'type'],
   data () {
     return {
-      colorArr: ['#ffa534', '#fb404b', '#ff9510', '#cc2127', '#248cc9', '#4ec6f8'],
+      colorArr: ['#ff9510', '#cc2127'],
       icon1: 'fa',
       icon2: this.icon
     }
@@ -22,9 +22,7 @@ export default {
 }
 </script>
 <style scoped>
-span {
-  color: black;
-}
+
 .gift {
   position: relative;
   display: flex;
