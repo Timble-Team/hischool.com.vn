@@ -48,6 +48,7 @@ jobs:
           script: |
             cd ~/SSR/hischool.com.vn
             npm install
+            npm install fibers
             echo Build Packages successful!
             npm run build
             echo Build Code successful!
