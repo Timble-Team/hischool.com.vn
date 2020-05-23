@@ -1,4 +1,3 @@
-cd ~/SSR/hischool.com.vn
 NC='\033[0m'
 GREEN='\033[0;32m'
 npm install

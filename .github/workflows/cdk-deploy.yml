@@ -46,4 +46,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            cd ~/SSR/hischool.com.vn
             bash ./ops/run-server.sh
