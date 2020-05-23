@@ -70,11 +70,11 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Open+Sans:wght@400;700&display=swap' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Inconsolata:400,700|Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i|Maven+Pro:400,500,700,900|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' }
     ],
     script: [
-      { src: 'https://use.fontawesome.com/ce16520130.js', defer: true },
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', async: true }
+      { src: 'https://use.fontawesome.com/ce16520130.js', defer: true  },
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' }
     ],
   },
   /*

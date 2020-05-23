@@ -1,6 +1,6 @@
 <template>
   <div v-if="price" class="cp-price-item text-center">
-    <div class="main-bg-price">
+    <div class="main-bg-price pb-2">
       <div class="star">
         <i class="fa fa-star" aria-hidden="true"></i>
         <i class="fa fa-star" aria-hidden="true"></i>
@@ -8,17 +8,23 @@
         <i class="fa fa-star" aria-hidden="true"></i>
         <i class="fa fa-star" aria-hidden="true"></i>
       </div>
-      <h2 class="title">{{price.num_pp}}</h2>
-      <p v-if="price.types == 0">Áp dụng theo sĩ số</p>
-      <p v-if="price.types == 1">Không giới hạn sĩ số</p>
+      <h2 class="title">{{price.name}}</h2>
+      <p v-if="+price.type == 0">Áp dụng theo sĩ số</p>
+      <p v-if="+price.type == 1">Không giới hạn sĩ số</p>
     </div>
-    <div v-if="price.types == 0" class="price-holder">
-      <p><b style="color: #3ca1c3;">{{price.priceFirst}}k/<i class="fa fa-user"></i></b> cho 30 người đầu tiên</p>
-      <p>từ người thứ 31 chỉ còn</p>
-      <b class="price-num">{{price.price}}<sup>K</sup>
-      <span><i class="fa fa-user"></i></span></b>
+    <div v-if="+price.type == 0" class="price-holder">
+      <template v-if="price.price">
+        <p><b style="color: #3ca1c3;">{{price.priceFirst}}k/<i class="ti-user"></i></b> cho 30 người đầu tiên</p>
+        <p>từ người thứ 31 chỉ còn</p>
+        <b class="price-num">{{price.price}}<sup>K</sup>
+        <span><i class="ti-user"></i></span></b>
+      </template>
+      <template v-else>
+        <b class="price-num">{{price.priceFirst}}<sup>K</sup>
+        <span><i class="ti-user"></i></span></b>
+      </template>
     </div>
-    <div v-if="price.types == 1" class="price-holder">
+    <div v-if="price.type == 1" class="price-holder">
       <b class="price-num">{{price.price}}<sup>K</sup></b>
     </div>
     <div class="meta-price">
@@ -26,7 +32,7 @@
       <p v-if="price.takenTime">Thời gian: <b>{{price.takenTime}}</b></p>
       <ul class="container list-price-rule normal-ul">
         <h6>Bao gồm</h6>
-        <li v-for="(item, index) of price.offer.split('/')" :key="index">
+        <li v-for="(item, index) of price.includes" :key="index">
           <a class="green-color"><i class="fa fa-check-circle-o" aria-hidden="true"></i> {{item}}</a>
           <hr class="line-item">
         </li>

@@ -17,7 +17,11 @@ export class HeaderData {
         type: 0,
         children: [
           {
-            name: 'Gói chụp Combo',
+            name: 'Gói chụp Combo sinh viên',
+            path: '/bang-gia?title=Combo&type=2'
+          },
+          {
+            name: 'Gói chụp Combo học sinh',
             path: '/bang-gia?title=Combo&type=2'
           },
           {
