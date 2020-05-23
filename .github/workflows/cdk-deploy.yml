@@ -47,7 +47,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd ~/SSR/hischool.com.vn
-            run: npm install
+            npm install
             npm run build
             rm -rf tmpfile
             rm -rf ssmtmpfile
