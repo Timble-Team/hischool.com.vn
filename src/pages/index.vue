@@ -3,7 +3,7 @@
     <div class="page-content bg-white">
       <carousel :images="images"/>
       <h2 class="text-center">Tiêu Điểm</h2>
-      <category :categories="categories"/>
+      <category :categories="mainAspects"/>
       <div class="content-block">
         <div class="section-full bg-white content-inner-4">
           <div class="container">
@@ -240,7 +240,7 @@ export default {
           paramsRoute: {}
         }
       ],
-      categories: [
+      mainAspects: [
         {
           image: require('../assets/images/banner/pic1.jpg'),
           title: 'KHO TRANG PHỤC KHỦNG',
