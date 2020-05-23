@@ -28,21 +28,23 @@
             </div>
             <div class="row" v-if="hotArticles.length === 4">
               <div class="col-xl-9 col-lg-8 col-md-7 col-sm-12 col-12">
-                <div class="row sp10">
-                  <div class="col-lg-6 m-b30 triangle">
-                    <div class="blog-card post-grid">
+                <div class="row">
+                  <div class="col-lg-12 triangle">
+                    <div class="blog-card post-grid" style="margin-bottom: 0">
                       <div class="blog-card-media">
-                        <img :src="hotArticles[0].images[0].name.url | takeImage" alt />
+                        <img :src="hotArticles[0].cover.url" alt />
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 d-flex">
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 d-flex">
                     <div class="blog-card center text-center bg-dark m-b30">
                       <div class="blog-card-info blog-card-custom text-white">
                         <h4 class="title">
-                          <router-link :to="{name: 'articlesDetail', params: {id: hotArticles[0].id}}">{{hotArticles[0].title}}</router-link>
+                          <router-link :to="{name: 'articlesDetail', params: {id: hotArticles[0].id}}">{{hotArticles[0].name}}</router-link>
                         </h4>
-                        <p>{{hotArticles[0].description}}</p>
+                        <p>{{hotArticles[0].desc}}</p>
                         <div class>
                           <SharedBtn/>
                         </div>
@@ -52,16 +54,16 @@
                 </div>
                 <div class="sep-bottom">
                   <div class="row">
-                    <div class="col-lg-4" v-for="art of hotArticles.slice(1,4)" :key="art.title">
+                    <div class="col-lg-4" v-for="(art, index) of hotArticles.slice(1,4)" :key="`sep${index}`">
                       <div class="blog-card post-grid grid-style m-b30 small-triangle">
-                        <div class="blog-card-media" :style="{backgroundImage: `url(https://manage.hischool.com.vn/${art.images[0].name.url})`}">
+                        <div class="blog-card-media" :style="{'background-image': `url(${art.cover.url})`}">
                         </div>
                         <div class="blog-card-info">
                           <div class="title-sm">
-                            <a href="javascript:void(0);">Beauty</a>
+                            <a href="javascript:void(0);">{{getCategory('articles', art.kind)}}</a>
                           </div>
                           <h5 class="font-20">
-                            <router-link :to="{name: 'articlesDetail', params: {id: art.id}}">{{art.title}}</router-link>
+                            <router-link :to="{name: 'articlesDetail', params: {id: art.id}}">{{art.name}}</router-link>
                           </h5>
                         </div>
                       </div>
@@ -191,13 +193,15 @@ import SharedBtn from '@/components/partials/SharedBtn.vue'
 import Sidebar from '@/common-layouts/sidebar.vue'
 import CoverArticleList from '@/components/modules/CoverArticleList.vue'
 import AnimatedNumber from 'animated-number-vue'
-import { APIService } from '@/helpers/services/api.service'
-var api = new APIService()
+// import { APIService } from '@/helpers/services/api.service'
+// var api = new APIService()
+import { convertDocumentRecord, convertCollectionRecord } from '@/helpers/services/common.js'
 
 export default {
   name: 'Home',
   data () {
     return {
+      categories: [],
       statistic: {
         classes: 0,
         costumes: 0,
@@ -258,19 +262,20 @@ export default {
     }
   },
   created () {
-   this.random1()
-    api.forkJoin([
-      api.get(['api', 'index_article'], { kind: 0 }), // Costumes
-      api.get(['api', 'index_article'], { kind: 1 }), // Posing
-      api.get(['api', 'index_article'], { kind: 2 }) // Ideas
-    ]).then(res => {
-      const idea = Math.floor(Math.random() * res[2].length)
-      this.hotArticles.push(res[2][idea])
-      res[2].splice(idea, idea + 1)
-      this.hotArticles.push(res[2][Math.floor(Math.random() * (res[2].length - 1))])
-      this.hotArticles.push(res[0][Math.floor(Math.random() * res[0].length)])
-      this.hotArticles.push(res[1][Math.floor(Math.random() * res[1].length)])
-    })
+    this.getArticles()
+    this.getCategories()
+    // api.forkJoin([
+    //   api.get(['api', 'index_article'], { kind: 0 }), // Costumes
+    //   api.get(['api', 'index_article'], { kind: 1 }), // Posing
+    //   api.get(['api', 'index_article'], { kind: 2 }) // Ideas
+    // ]).then(res => {
+    //   const idea = Math.floor(Math.random() * res[2].length)
+    //   this.hotArticles.push(res[2][idea])
+    //   res[2].splice(idea, idea + 1)
+    //   this.hotArticles.push(res[2][Math.floor(Math.random() * (res[2].length - 1))])
+    //   this.hotArticles.push(res[0][Math.floor(Math.random() * res[0].length)])
+    //   this.hotArticles.push(res[1][Math.floor(Math.random() * res[1].length)])
+    // })
   },
   mounted () {
     this.statistic = {
@@ -280,13 +285,34 @@ export default {
       experience: 5
     }
   },
+  computed: {
+  },
   methods: {
+    getCategory(type, kind) {
+      if (this.categories.length > 0) {
+        const cat = this.categories.find(x => +x.key === +kind && x.type === type)
+        return cat ? cat.name : 'KỈ YẾU'
+      }
+      return 'KỈ YẾU'
+    },
     formatToPrice (value) {
       return `<span>${value.toFixed(0)}</span>`
     },
-    async random1() {
-      const ref = this.$fireStore.collection('users')
-      console.log(ref)
+    async getArticles() {
+      const docHotArticles = await this.$fireStore.collection('home').doc('hot-articles').get()
+      const hotArticles = docHotArticles.data().articles.map(async x => {
+        const doc = convertDocumentRecord(await x.get())
+        return doc
+      })
+      Promise.all(hotArticles).then(articles => {
+        this.hotArticles = articles
+        console.log(this.hotArticles)
+      })
+    },
+    async getCategories() {
+      const categoriesRef = await this.$fireStore.collection('categories').get()
+      this.categories = convertCollectionRecord(categoriesRef)
+      this.$store.commit('setCategories', this.categories)
     }
   },
   components: {

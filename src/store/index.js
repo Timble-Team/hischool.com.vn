@@ -1,10 +1,10 @@
 export const state = () => ({
-  sidebarDisplay: false
+  categories: []
 })
 
 export const mutations = {
-  setSidebar (state, status = null) {
-    state.sidebarDisplay = status !== null ? status : !state.sidebarDisplay
+  setCategories (state, categories = []) {
+    state.categories = categories
   }
 }
 // modules: {
