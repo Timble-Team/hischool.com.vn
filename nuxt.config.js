@@ -73,8 +73,8 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Open+Sans:wght@400;700&display=swap' }
     ],
     script: [
-      { src: 'https://use.fontawesome.com/ce16520130.js' },
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' }
+      { src: 'https://use.fontawesome.com/ce16520130.js', defer: true },
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', async: true }
     ],
   },
   /*
