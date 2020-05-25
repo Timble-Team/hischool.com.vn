@@ -17,6 +17,7 @@ export default {
   created() {
     this.getCategories()
     this.getClothes()
+    this.getAccessories()
   },
   watch:{
     $route (to, from){
@@ -40,6 +41,11 @@ export default {
         link: x.link ? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
       }))
       this.$store.commit('setClothes', clothes)
+    },
+    async getAccessories() {
+      const accessoriesRef = await this.$fireStore.collection('accessories').get()
+      let accessories = this.$common.convertCollectionRecord(accessoriesRef).sort((a,b) => (+a.order - +b.order))
+      this.$store.commit('setAccessories', accessories)
     }
   }
 }

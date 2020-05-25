@@ -1,6 +1,15 @@
 export const state = () => ({
   categories: [],
-  clothes: []
+  clothes: [],
+  accessories: [],
+  slugs: {
+    'tao-dang': '3',
+    'huong-dan': '4',
+    'idea': '1',
+    '3':'tao-dang',
+    '4': 'huong-dan',
+    '1': 'idea'
+  }
 })
 
 export const mutations = {
@@ -9,7 +18,10 @@ export const mutations = {
   },
   setClothes (state, clothes = []) {
     state.clothes = clothes
-  }
+  },
+  setAccessories (state, accessories = []) {
+    state.accessories = accessories
+  },
 }
 
 // modules: {

@@ -26,9 +26,12 @@
         </template>
       </div>
     </div>
-    <div v-if="price.type == 1" class="price-holder">
-      <b class="price-num">{{price.priceFirst}}<sup>K</sup></b>
-    </div>
+    <template v-if="price.type == 1">
+      <div class="price-holder">
+        <b class="price-num">{{price.priceFirst}}<sup>K</sup></b><br>
+      </div>
+      <small>Gói này ko tính theo sĩ số</small>
+    </template>
     <div class="meta-price">
       <span v-if="+price.type === 0">Số thợ chụp: sĩ số / 20</span>
       <p v-if="price.takenTime">Thời gian: <b>{{price.takenTime}}</b></p>

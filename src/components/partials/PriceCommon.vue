@@ -51,7 +51,7 @@
           <h5 class="text-center">Các gói chụp combo cơ bản</h5>
           <div class="row">
             <div class="col-md-4 col-sm-12 price-item" v-for="(item, index) of prices" :key ="`a${index}`">
-              <price-item :price="item"/>
+              <price-item :price="item" :height="height"/>
             </div>
           </div>
           <h5 class="text-center">Các gói chụp mở rộng</h5>
@@ -66,7 +66,7 @@
               <price-item :price="item" :height="true"/>
             </div>
           </div>
-          <h5 class="text-center">Các gói trang phục concept</h5>
+          <h5 class="p-t50 text-center">Các gói trang phục concept</h5>
           <div class="row">
             <div class="col-lg-4" v-for="(item, index) of clothes" :key="index">
               <CoverArticle :article="item" :shortcut="true" />
@@ -74,6 +74,17 @@
             <div class="text-center dis-block">
               <button class="load-more-btn text-center">
                 <nuxt-link :to="'/bang-gia/trang-phuc'" class="btn outline outline-2 black radius-xl">Xem thêm gói trang phục</nuxt-link>
+              </button>
+            </div>
+          </div>
+          <h5 class="p-t50 text-center">Các gói phụ kiện</h5>
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-3" v-for="(item, index) of accessories" :key="index">
+              <Accessory :accessory="item" />
+            </div>
+            <div class="text-center dis-block">
+              <button class="load-more-btn text-center">
+                <nuxt-link :to="'/bang-gia/trang-phuc'" class="btn outline outline-2 black radius-xl">Xem full giá phụ kiện</nuxt-link>
               </button>
             </div>
           </div>
@@ -99,6 +110,7 @@
 <script>
 import Gift from '@/components/partials/Gift'
 import PriceItem from '@/components/partials/PriceItem'
+import Accessory from '@/components/partials/Accessory'
 import CoverArticle from '@/components/modules/CoverArticle2.vue'
 
 export default {
@@ -106,11 +118,13 @@ export default {
   components: {
     Gift,
     PriceItem,
-    CoverArticle
+    CoverArticle,
+    Accessory
   },
   props: [
     'prices',
-    'type'
+    'type',
+    'height'
   ],
   data () {
     return {
@@ -170,6 +184,9 @@ export default {
   computed: {
     clothes () {
       return this.$store.state.clothes.slice(0, 3)
+    },
+    accessories () {
+      return this.$store.state.accessories.slice(0, 4)
     }
   },
   methods: {
@@ -180,82 +197,13 @@ export default {
       }, 500)
     },
     async getExtraShootingPrices () {
-      const pricesRef = await this.$fireStore.collection('prices').where('kind', '==', '3').get()
+      const pricesRef = await this.$fireStore.collection('prices').where('kind', '==', '6').get()
       this.extraShootingPrices = this.$common.convertCollectionRecord(pricesRef).sort((a,b) => (+a.order - +b.order))
     },
     async getVideoPrices () {
-      const pricesRef = await this.$fireStore.collection('prices').where('kind', '==', '4').get()
+      const pricesRef = await this.$fireStore.collection('prices').where('kind', '==', '3').get()
       this.videoPrices = this.$common.convertCollectionRecord(pricesRef).sort((a,b) => (+a.order - +b.order))
     }
   }
 }
 </script>
-<style lang="scss">
-.title-price {
-  margin: 20px 0 !important;
-}
-@keyframes color-animation {
-  0% {
-    color: #ad1457;
-  }
-  50% {
-    color: #6a1b9a;
-  }
-  100% {
-    color: #bbdefb
-  }
-}
-.block {
-  i ,a {
-    animation: color-animation 1s infinite linear alternate;
-  }
-}
-.price-item {
-  margin-bottom: 20px;
-}
-.price-item:first-child {
-  .main-bg-price {
-    background-color: #b9dadf;
-  }
-}
-.price-item:nth-child(2) {
-  .main-bg-price {
-    background-color: #7dc0d1;
-  }
-}
-.price-item:nth-child(3) {
-  .main-bg-price {
-    background-color: #1d7f8c;
-  }
-}
-.price-item:nth-child(4) {
-  .main-bg-price {
-    background-color: #c36742;
-  }
-}
-.price-item:nth-child(5) {
-  .main-bg-price {
-    background-color: #f2a26d;
-  }
-}
-.price-item:nth-child(6) {
-  .main-bg-price {
-    background-color: #f9d35f;
-  }
-}
-.list-item-notice {
-  margin-bottom: 10px;
-  &:before {
-    content: '✦';
-    padding-right: 20px;
-  }
-}
-.normal-ul {
-  list-style: none;
-  padding: 0;
-}
-.background-price {
-  padding: 20px 0;
-  background-color: #f0f0f0;
-}
-</style>

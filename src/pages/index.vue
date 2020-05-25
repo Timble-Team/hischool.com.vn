@@ -243,18 +243,19 @@ export default {
           image: require('../assets/images/banner/pic1.jpg'),
           title: 'KHO TRANG PHỤC KHỦNG',
           subTitle: 'BEAUTY',
-          path: '/price/clothes'
+          path: '/bang-gia/trang-phuc'
         },
         {
           image: require('../assets/images/banner/pic1.jpg'),
           title: 'COMBO CHỤP SIÊU CHẤT',
           subTitle: 'PHOTOGRAPHY',
-          path: 'price?title=Combo&type=2'
+          path: '/bang-gia/sinh-vien'
         },
         {
           image: require('../assets/images/banner/pic1.jpg'),
           title: 'QUÀ TẶNG SIÊU NHIỀU',
-          subTitle: 'BONUS'
+          subTitle: 'BONUS',
+          path: '/bang-gia/hoc-sinh'
         }
       ]
     }

@@ -25,8 +25,8 @@ export class HeaderData {
             path: '/bang-gia/hoc-sinh'
           },
           {
-            name: 'Gói quay',
-            path: '/bang-gia?title=Videos&type=1'
+            name: 'Gói quay video',
+            path: '/bang-gia/quay-phim'
           },
           {
             name: 'Gói trang phục',
@@ -38,7 +38,7 @@ export class HeaderData {
           },
           {
             name: 'Gói phụ kiện',
-            path: '/bang-gia/accessories'
+            path: '/bang-gia/phu-kien'
           },
           {
             name: 'Gói makeup/ làm tóc',
@@ -70,26 +70,23 @@ export class HeaderData {
       },
       {
         name: 'Tin tức',
-        type: 1,
+        type: 0,
         children: [
           // {
           //   name: 'Khuyến mãi',
           //   path: '/news/offer'
           // },
           {
-            name: 'Trang phục',
-            path: '/trang-phuc',
-            items: this.items[0]
-          },
-          {
-            name: 'Ý tưởng',
-            path: '/idea',
-            items: this.items[1]
+            name: 'Ý tưởng - Concept',
+            path: '/bai-viet/idea',
           },
           {
             name: 'Tạo dáng',
-            path: '/pose-dang',
-            items: this.items[2]
+            path: '/bai-viet/pose-dang',
+          },
+          {
+            name: 'Tips & Tricks',
+            path: '/bai-viet/huong-dan',
           }
         ]
       },
