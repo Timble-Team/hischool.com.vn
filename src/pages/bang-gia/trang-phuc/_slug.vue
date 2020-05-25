@@ -44,7 +44,7 @@
                   Trang phục có thể bạn quan tâm
                 </h5>
                 <div class="row">
-                  <div class="col-lg-4" v-for="(item, index) of suggestClothes" :key="`a${index}`">
+                  <div class="col-lg-6" v-for="(item, index) of suggestClothes" :key="`a${index}`">
                     <CoverArticle :article="item" :shortcut="true"/>
                   </div>
                 </div>
@@ -109,18 +109,11 @@ export default {
       // product2: null
     }
   },
-  // async beforeRouteEnter (to, form, next) {
-  //   var api = new APIService()
-  //   to.meta['product'] = await api.get(['api', 'cloths', to.params.id])
-  //   to.meta['suggestProduct'] = await api.get(['api', 'related_clothes', to.params.id])
-  //   next()
-  // },
-  // async beforeRouteUpdate (to, form, next) {
-  //   var api = new APIService()
-  //   to.meta['product'] = await api.get(['api', 'cloths', to.params.id])
-  //   to.meta['suggestProduct'] = await api.get(['api', 'related_clothes', to.params.id])
-  //   next()
-  // },
+  computed: {
+    clothes () {
+      return this.$store.state.clothes
+    }
+  },
   created () {
     this.routeId = this.$route.params.slug.split('-').slice(-1)[0]
     this.getCloth()
@@ -173,36 +166,15 @@ export default {
     async getCloth() {
       const clothRef = await this.$fireStore.collection('clothes').doc(this.routeId).get()
       this.mainCloth = this.$common.convertDocumentRecord(clothRef)
-      console.log(this.mainCloth)
     },
     async getSuggestClothes() {
-      const clothesRef = await this.$fireStore.collection('clothes').get()
-      const suggestClothes = this.$common.convertCollectionRecord(clothesRef)
-      .filter(x => x.id !== this.routeId)
-      .map(x => ({
+      const allClothesWithoutCurrentId = this.clothes.filter(x => x.id !== this.routeId)
+      const shuffleClothes = this.$common.shuffle(allClothesWithoutCurrentId)
+      this.suggestClothes = shuffleClothes.slice(0, 4).map(x => ({
         ...x,
         link: x.link? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
       }))
-      this.suggestClothes = this.shuffle(suggestClothes)
     },
-    shuffle(array) {
-      let currentIndex = array.length, temporaryValue, randomIndex;
-
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-
-      return array;
-    }
   //   syncPosition (el) {
   //     var count = el.item.count - 1
   //     var current = Math.round(el.item.index - (el.item.count / 2) - 0.5)

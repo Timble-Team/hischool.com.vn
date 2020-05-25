@@ -50,12 +50,33 @@
           </ul>
           <h5 class="text-center">Các gói chụp combo cơ bản</h5>
           <div class="row">
-            <div class="col-md-4 col-sm-4 price-item" v-for="(item, index) of prices" :key ="index">
+            <div class="col-md-4 col-sm-12 price-item" v-for="(item, index) of prices" :key ="`a${index}`">
               <price-item :price="item"/>
             </div>
           </div>
           <h5 class="text-center">Các gói chụp mở rộng</h5>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 price-item" v-for="(item, index) of extraShootingPrices" :key ="`b${index}`">
+              <price-item :price="item" :height="true"/>
+            </div>
+          </div>
+          <h5 class="text-center">Các gói Video</h5>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 price-item" v-for="(item, index) of videoPrices" :key ="`c${index}`">
+              <price-item :price="item" :height="true"/>
+            </div>
+          </div>
           <h5 class="text-center">Các gói trang phục concept</h5>
+          <div class="row">
+            <div class="col-lg-4" v-for="(item, index) of clothes" :key="index">
+              <CoverArticle :article="item" :shortcut="true" />
+            </div>
+            <div class="text-center dis-block">
+              <button class="load-more-btn text-center">
+                <nuxt-link :to="'/bang-gia/trang-phuc'" class="btn outline outline-2 black radius-xl">Xem thêm gói trang phục</nuxt-link>
+              </button>
+            </div>
+          </div>
           <div>
             <h4 id="skip"  class="title-price">MỘT SỐ LƯU Ý</h4>
             <ul class="notice-list normal-ul">
@@ -78,12 +99,14 @@
 <script>
 import Gift from '@/components/partials/Gift'
 import PriceItem from '@/components/partials/PriceItem'
+import CoverArticle from '@/components/modules/CoverArticle2.vue'
 
 export default {
   name: 'Price',
   components: {
     Gift,
-    PriceItem
+    PriceItem,
+    CoverArticle
   },
   props: [
     'prices',
@@ -91,6 +114,8 @@ export default {
   ],
   data () {
     return {
+      extraShootingPrices: [],
+      videoPrices: [],
       giftPhoto: [
         'Hoa cầm tay và hoa đội đầu cho cả lớp',
         'Cà vạt cho tất cả các bạn nam',
@@ -138,17 +163,29 @@ export default {
       ],
     }
   },
-  created () {
+  created() {
+    this.getExtraShootingPrices()
+    this.getVideoPrices()
   },
-  // async beforeRouteUpdate (to, form, next) {
-  //   next()
-  // },
+  computed: {
+    clothes () {
+      return this.$store.state.clothes.slice(0, 3)
+    }
+  },
   methods: {
     scrollSmooth () {
       var hash = '#skip'
       $('html, body').animate({
         scrollTop: $(hash).offset().top
       }, 500)
+    },
+    async getExtraShootingPrices () {
+      const pricesRef = await this.$fireStore.collection('prices').where('kind', '==', '3').get()
+      this.extraShootingPrices = this.$common.convertCollectionRecord(pricesRef).sort((a,b) => (+a.order - +b.order))
+    },
+    async getVideoPrices () {
+      const pricesRef = await this.$fireStore.collection('prices').where('kind', '==', '4').get()
+      this.videoPrices = this.$common.convertCollectionRecord(pricesRef).sort((a,b) => (+a.order - +b.order))
     }
   }
 }

@@ -1,12 +1,17 @@
 export const state = () => ({
-  categories: []
+  categories: [],
+  clothes: []
 })
 
 export const mutations = {
   setCategories (state, categories = []) {
     state.categories = categories
+  },
+  setClothes (state, clothes = []) {
+    state.clothes = clothes
   }
 }
+
 // modules: {
   //   todos: {
   //     namespaced: true,

@@ -14,6 +14,10 @@ export default {
     AppHeader,
     AppFooter,
   },
+  created() {
+    this.getCategories()
+    this.getClothes()
+  },
   watch:{
     $route (to, from){
       // this.$store.commit('setSidebar', false)
@@ -22,6 +26,20 @@ export default {
   methods: {
     scrollTop() {
       window.scrollTo({top: 0, behavior: 'smooth'})
+    },
+    async getCategories() {
+      const categoriesRef = await this.$fireStore.collection('categories').get()
+      const categories = this.$common.convertCollectionRecord(categoriesRef)
+      this.$store.commit('setCategories', categories)
+    },
+    async getClothes() {
+      const clothesRef = await this.$fireStore.collection('clothes').get()
+      let clothes = this.$common.convertCollectionRecord(clothesRef).sort((a,b) => (+a.order - +b.order))
+      clothes = clothes.map(x => ({
+        ...x,
+        link: x.link ? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
+      }))
+      this.$store.commit('setClothes', clothes)
     }
   }
 }

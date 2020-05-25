@@ -13,30 +13,34 @@
       <p v-if="+price.type == 1">Không giới hạn sĩ số</p>
     </div>
     <div v-if="+price.type == 0" class="price-holder">
-      <template v-if="price.price">
-        <p><b style="color: #3ca1c3;">{{price.priceFirst}}k/<i class="ti-user"></i></b> cho 30 người đầu tiên</p>
-        <p>từ người thứ 31 chỉ còn</p>
-        <b class="price-num">{{price.price}}<sup>K</sup>
-        <span><i class="ti-user"></i></span></b>
-      </template>
-      <template v-else>
-        <b class="price-num">{{price.priceFirst}}<sup>K</sup>
-        <span><i class="ti-user"></i></span></b>
-      </template>
+      <div>
+        <template v-if="price.price">
+          <p><b style="color: #f7d1aa;">{{price.priceFirst}}k/<i class="ti-user"></i></b> cho 30 người đầu tiên</p>
+          <p>từ người thứ 31 chỉ còn</p>
+          <b class="price-num">{{price.price}}<sup>K</sup>
+          <span><i class="ti-user"></i></span></b>
+        </template>
+        <template v-else>
+          <b class="price-num">{{price.priceFirst}}<sup>K</sup>
+          <span><i class="ti-user"></i></span></b>
+        </template>
+      </div>
     </div>
     <div v-if="price.type == 1" class="price-holder">
-      <b class="price-num">{{price.price}}<sup>K</sup></b>
+      <b class="price-num">{{price.priceFirst}}<sup>K</sup></b>
     </div>
     <div class="meta-price">
-      <span>Số thợ chụp: sĩ số / 20</span>
+      <span v-if="+price.type === 0">Số thợ chụp: sĩ số / 20</span>
       <p v-if="price.takenTime">Thời gian: <b>{{price.takenTime}}</b></p>
-      <ul class="container list-price-rule normal-ul">
-        <h6>Bao gồm</h6>
-        <li v-for="(item, index) of price.includes" :key="index">
-          <a class="green-color"><i class="fa fa-check-circle-o" aria-hidden="true"></i> {{item}}</a>
-          <hr class="line-item">
-        </li>
-      </ul>
+      <div class="container list-price-rule" :class="height ? 'small-price' : ''">
+        <ul class="normal-ul">
+          <h6>Bao gồm</h6>
+          <li v-for="(item, index) of price.includes" :key="index">
+            <a class="green-color"><i class="fa fa-check-circle-o" aria-hidden="true"></i> {{item}}</a>
+            <hr class="line-item">
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- <el-button v-if="!booked"  type="danger" @click="booking({
         id: price.id,
@@ -56,23 +60,13 @@
 </template>
 <script>
 export default {
-  props: ['price'],
+  props: ['price', 'height'],
   data () {
     return {
       colorArr: ['#ffa534', '#fb404b', '#ff9510', '#cc2127', '#248cc9', '#4ec6f8'],
       booked: false
     }
-  },
-  mounted () {
-    // let packsArr = JSON.parse(localStorage.getItem('PACKS'))
-    // this.booked = packsArr.filter(x => x.id === this.price.id).length > 0
   }
-  // methods: {
-  //   ...mapActions({
-  //     booking: 'booking',
-  //     deleteBooking: 'deleteBooking'
-  //   }),
-  // }
 }
 </script>
 <style lang="scss" scoped>
@@ -90,7 +84,7 @@ export default {
   font-size: 40px;
   font-family: 'Anton', sans-serif;
   letter-spacing: 1.5px;
-  color: #3ca1c3;
+  color: #f7d1aa;
 }
 .main-bg-price {
   // background: linear-gradient(to top right, #ddb958 0%, #e5c66b 100%);
@@ -108,8 +102,14 @@ export default {
 }
 .list-price-rule {
   padding-top: 30px;
-//   overflow: scroll;
-//   max-height: 300px;
+  height: 561px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.small-price {
+  height: 340px;
 }
 
 .el-button {
@@ -137,6 +137,10 @@ export default {
   }
   .price-holder {
     padding-top: 10px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 .line-item {
@@ -149,5 +153,8 @@ export default {
   &:hover {
     color: #9ACD32;
   }
+}
+.ti-user {
+  color: grey;
 }
 </style>

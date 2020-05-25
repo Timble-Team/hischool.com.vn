@@ -141,7 +141,6 @@ export default {
       }
     },
     closeSidebar (val) {
-      console.log(1231, val)
       if (val) {
         this.sidebarParams = false
       }

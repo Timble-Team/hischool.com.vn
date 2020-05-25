@@ -22,20 +22,11 @@ export default {
   },
   data () {
     return {
-      clothes: []
     }
   },
-  created () {
-    this.getClothes()
-  },
-  methods: {
-    async getClothes () {
-      const clothesRef = await this.$fireStore.collection('clothes').get()
-      this.clothes = this.$common.convertCollectionRecord(clothesRef).sort((a,b) => (+a.order - +b.order))
-      this.clothes = this.clothes.map(x => ({
-        ...x,
-        link: x.link ? x.link : this.$options.filters.convertVie(x.name, x.id)
-      }))
+  computed: {
+    clothes () {
+      return this.$store.state.clothes
     }
   }
 }

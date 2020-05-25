@@ -178,7 +178,7 @@
               </div>
               <Sidebar/>
             </div>
-            <CoverArticleList :coverData="coverArticles"/>
+            <!-- <CoverArticleList :coverData="coverArticles"/> -->
           </div>
         </div>
       </div>
@@ -191,7 +191,7 @@ import Carousel from '@/components/modules/Carousel1.vue'
 import Category from '@/components/modules/Category1.vue'
 import SharedBtn from '@/components/partials/SharedBtn.vue'
 import Sidebar from '@/common-layouts/sidebar.vue'
-import CoverArticleList from '@/components/modules/CoverArticleList.vue'
+// import CoverArticleList from '@/components/modules/CoverArticleList.vue'
 import AnimatedNumber from 'animated-number-vue'
 // import { APIService } from '@/helpers/services/api.service'
 // var api = new APIService()
@@ -200,7 +200,6 @@ export default {
   name: 'Home',
   data () {
     return {
-      categories: [],
       statistic: {
         classes: 0,
         costumes: 0,
@@ -262,7 +261,6 @@ export default {
   },
   created () {
     this.getArticles()
-    this.getCategories()
     // api.forkJoin([
     //   api.get(['api', 'index_article'], { kind: 0 }), // Costumes
     //   api.get(['api', 'index_article'], { kind: 1 }), // Posing
@@ -285,6 +283,9 @@ export default {
     }
   },
   computed: {
+    categories () {
+      return this.$store.state.categories
+    }
   },
   methods: {
     getCategory(type, kind) {
@@ -305,13 +306,7 @@ export default {
       })
       Promise.all(hotArticles).then(articles => {
         this.hotArticles = articles
-        console.log(this.hotArticles)
       })
-    },
-    async getCategories() {
-      const categoriesRef = await this.$fireStore.collection('categories').get()
-      this.categories = this.$common.convertCollectionRecord(categoriesRef)
-      this.$store.commit('setCategories', this.categories)
     }
   },
   components: {
@@ -320,7 +315,7 @@ export default {
     Category,
     SharedBtn,
     Sidebar,
-    CoverArticleList
+    // CoverArticleList
   }
 }
 </script>
