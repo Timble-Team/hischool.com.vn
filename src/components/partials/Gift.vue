@@ -15,7 +15,7 @@ export default {
   data () {
     return {
       colorArr: ['#ff9510', '#cc2127'],
-      icon1: 'fa',
+      icon1: 'ti',
       icon2: this.icon
     }
   }
@@ -32,7 +32,7 @@ export default {
   font-weight: 700;
   text-transform: uppercase;
 }
-.fa {
+.ti {
   float: left;
   padding-right: 5px;
   width: 60px;

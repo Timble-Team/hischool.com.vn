@@ -2519,7 +2519,19 @@ blockquote:before {
     margin-left: 10px;
 }
 @media only screen and (max-width: 767px) {
-
+  .article-desc {
+    height: calc(24px * 5);
+    overflow: hidden;
+    position: relative;
+  }
+  .article-desc .see-more {
+    display: block !important;
+    padding-left: 10px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 }
 @media only screen and (max-width: 480px) {
     .extra-nav {

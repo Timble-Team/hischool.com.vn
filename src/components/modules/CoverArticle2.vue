@@ -1,49 +1,107 @@
 <template>
-  <div class="blog-card post-grid">
+  <article class="blog-card post-grid">
     <div class="blog-card-media">
-      <img :src="cover.image" alt />
+      <nuxt-link tag="figure" class="blog-card-media-box" :to="article.link" append>
+        <img style="margin-right: 2px" :src="article.cover[0].url" :alt="article.name" />
+        <img :src="article.cover[1].url" :alt="article.name" />
+      </nuxt-link>
     </div>
     <div class="blog-card-info">
-      <div class="title-sm">
-        <a href="javascript:void(0);">beauty</a>
+      <nuxt-link v-if="!shortcut" :to="article.link" append>
+        <h4 class="title">
+        {{article.name}}
+        </h4>
+      </nuxt-link>
+      <nuxt-link v-else :to="article.link" append>
+        <h6 class="title">
+        {{article.name}}
+        </h6>
+      </nuxt-link>
+      <div class="row" v-if="!shortcut">
+        <div class="col-9">
+          <div class="article-desc">
+            <div v-html="article.desc"></div>
+            <nuxt-link :to="article.link" append>
+              <span class="see-more"> Xem thêm </span>
+            </nuxt-link>
+          </div>
+        </div>
+        <div class="col-3">
+          <p class="price-blog"><span>{{article.priceUnder20}}K</span></p>
+        </div>
       </div>
-      <h4 class="title">
-        <router-link :to="{name: cover.nameRoute, params: cover.paramsRoute}">{{cover.title}}</router-link>
-      </h4>
-      <p>{{cover.description}}</p>
-      <ul class="social-link-round">
-        <li class="link-ic">
-          <a href="javascript:void(0);" class="btn-link share">
-            <i class="la la-share-alt"></i>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0);" class="btn-link">
-            <i class="fa fa-twitter"></i>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0);" class="btn-link">
-            <i class="fa fa-pinterest-p"></i>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0);" class="btn-link">
-            <i class="fa fa-facebook"></i>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0);" class="btn-link">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </li>
-      </ul>
+      <p class="article-accessories" v-if="!shortcut">
+        Phụ kiện: <span v-for="(item, index) of article.accessories" :key="index">{{item.name}}</span>
+      </p>
     </div>
-  </div>
+  </article>
 </template>
 <script>
 export default {
   name: 'CoverArticle2',
-  props: ['cover']
+  props: {
+    article: Object,
+    shortcut: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
+<style lang="scss" scoped>
+.blog-card-media {
+  height: 0;
+  padding-bottom: 50%;
+  position: relative;
+  overflow: hidden;
+  img {
+    height: 100%;
+  }
+  &-box {
+    cursor: pointer;
+    border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+.blog-card-info {
+  p, .article-desc {
+    text-align: left;
+  }
+  .price-blog {
+    border: 2px solid #1d1d1d;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 23px;
+      font-weight: bold;
+    }
+  }
+  .article-desc .see-more {
+    display: none;
+  }
+  .article-accessories {
+    padding-bottom: 70px;
+    span {
+      padding: 10px;
+      margin: 0 5px;
+      border-radius: 3px;
+      background-color: #f1f1f1;
+    }
+  }
+}
+</style>

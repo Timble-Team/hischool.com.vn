@@ -1,13 +1,11 @@
 <template>
   <div class="category-box m-b20">
-    <router-link :to="{name: cover.nameRoute, params: cover.paramsRoute}">
+    <nuxt-link :to="cover.link">
       <div class="category-media">
-        <img :src="cover.image" alt="">
+        <img :src="cover.cover[1].url" alt="">
       </div>
-      <div class="category-info type-1">
-        <a href="javascript:void(0);" class="category-title btn-style">{{cover.title}}</a>
-      </div>
-    </router-link>
+      <a href="javascript:void(0);" class="category-title btn-style"><h6>{{cover.name}}</h6></a>
+    </nuxt-link>
   </div>
 </template>
 

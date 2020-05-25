@@ -195,7 +195,6 @@ import CoverArticleList from '@/components/modules/CoverArticleList.vue'
 import AnimatedNumber from 'animated-number-vue'
 // import { APIService } from '@/helpers/services/api.service'
 // var api = new APIService()
-import { convertDocumentRecord, convertCollectionRecord } from '@/helpers/services/common.js'
 
 export default {
   name: 'Home',
@@ -301,7 +300,7 @@ export default {
     async getArticles() {
       const docHotArticles = await this.$fireStore.collection('home').doc('hot-articles').get()
       const hotArticles = docHotArticles.data().articles.map(async x => {
-        const doc = convertDocumentRecord(await x.get())
+        const doc = this.$common.convertDocumentRecord(await x.get())
         return doc
       })
       Promise.all(hotArticles).then(articles => {
@@ -311,7 +310,7 @@ export default {
     },
     async getCategories() {
       const categoriesRef = await this.$fireStore.collection('categories').get()
-      this.categories = convertCollectionRecord(categoriesRef)
+      this.categories = this.$common.convertCollectionRecord(categoriesRef)
       this.$store.commit('setCategories', this.categories)
     }
   },

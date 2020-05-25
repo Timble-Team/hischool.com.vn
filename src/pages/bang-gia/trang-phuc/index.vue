@@ -2,8 +2,8 @@
   <div class="container">
     <h3 class="title-price text-center">Bảng giá trang phục</h3>
     <div class="row" v-if="clothes.length > 0">
-      <div class="col-lg-4" v-for="(item, index) of clothes" :key="index">
-        <CoverArticle :cover="item"/>
+      <div class="col-lg-6" v-for="(item, index) of clothes" :key="index">
+        <CoverArticle :article="item"/>
       </div>
     </div>
   </div>
@@ -26,15 +26,17 @@ export default {
     }
   },
   created () {
-    api.get(['api', 'cloths']).then(res => {
-      this.clothes = res.map(x => ({
-        image: x.images[0] ? this.$options.filters.takeImage(x.images[0].name.url) : null,
-        title: x.name,
-        nameRoute: 'priceClothesDetail',
-        description: x.description,
-        paramsRoute: { id: x.id }
+    this.getClothes()
+  },
+  methods: {
+    async getClothes () {
+      const clothesRef = await this.$fireStore.collection('clothes').get()
+      this.clothes = this.$common.convertCollectionRecord(clothesRef).sort((a,b) => (+a.order - +b.order))
+      this.clothes = this.clothes.map(x => ({
+        ...x,
+        link: x.link ? x.link : this.$options.filters.convertVie(x.name, x.id)
       }))
-    })
+    }
   }
 }
 </script>

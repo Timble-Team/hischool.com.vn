@@ -87,6 +87,7 @@ module.exports = {
   plugins: [
     '@/middleware/filter',
     '@/plugins/vue-plyr',
+    '@/plugins/vue-inject.js',
     { src: '@/plugins/slick-slide', ssr: false },
     { src: '@/plugins/owl-carousel.js', ssr: false }
   ],
