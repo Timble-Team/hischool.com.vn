@@ -52,19 +52,19 @@ export class HeaderData {
         children: [
           {
             name: 'Ảnh',
-            path: '/product/pictures'
+            path: '/san-pham/anh-nghe-thuat'
           },
           {
             name: 'Video',
-            path: '/product/videos'
+            path: '/san-pham/video'
           },
           {
             name: 'Trang trí',
-            path: '/product/decoration'
+            path: '/san-pham/trang-tri'
           },
           {
             name: 'SCHOOL STORIES',
-            path: '/product/stories'
+            path: '/san-pham/stories'
           }
         ]
       },
@@ -83,6 +83,10 @@ export class HeaderData {
           {
             name: 'Tạo dáng',
             path: '/bai-viet/pose-dang',
+          },
+          {
+            name: 'Địa điểm lý tưởng',
+            path: '/bai-viet/dia-diem-chup-hinh',
           },
           {
             name: 'Tips & Tricks',

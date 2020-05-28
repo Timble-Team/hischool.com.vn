@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div id="fb-root"></div>
     <app-header/>
     <nuxt />
     <app-footer/>
@@ -23,6 +24,8 @@ export default {
     $route (to, from){
       // this.$store.commit('setSidebar', false)
     }
+  },
+  mounted() {
   },
   methods: {
     scrollTop() {

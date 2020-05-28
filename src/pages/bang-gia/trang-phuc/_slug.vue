@@ -36,7 +36,7 @@
                 <div class="dlab-divider bg-gray tb20"></div>
               </ul>
               <h5>Mô tả:</h5>
-              <div v-html="mainCloth.content">
+              <div class="ckeditor-description" v-html="mainCloth.content">
               </div>
               <hr>
               <div class="dlab-post-title">

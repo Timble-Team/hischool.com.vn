@@ -4,7 +4,7 @@
     </nuxt-link>
     <div class="blog-card-info">
       <div class="title-sm">
-        <a href="javascript:void(0);">{{getCategory('articles', article.kind)}}</a>
+        <a href="javascript:void(0);">{{getCategory(instance, article.kind)}}</a>
       </div>
       <h5 class="font-20">
         <nuxt-link :to="article.link">{{article.name}}</nuxt-link>
@@ -44,6 +44,10 @@ export default {
   name: 'CoverArticle3',
   props: {
     article: Object,
+    instance: {
+      default: 'articles',
+      type: String
+    }
   },
   computed: {
     categories () {

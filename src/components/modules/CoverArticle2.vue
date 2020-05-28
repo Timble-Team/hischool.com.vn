@@ -20,7 +20,7 @@
       <div class="row" v-if="!shortcut">
         <div class="col-9">
           <div class="article-desc">
-            <div v-html="article.desc"></div>
+            <div class="ckeditor-description" v-html="article.desc"></div>
             <nuxt-link :to="article.link" append>
               <span class="see-more"> Xem thêm </span>
             </nuxt-link>

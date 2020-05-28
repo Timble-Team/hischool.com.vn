@@ -84,7 +84,7 @@
             </div>
             <div class="text-center dis-block">
               <button class="load-more-btn text-center">
-                <nuxt-link :to="'/bang-gia/trang-phuc'" class="btn outline outline-2 black radius-xl">Xem full giá phụ kiện</nuxt-link>
+                <nuxt-link :to="'/bang-gia/phu-kien'" class="btn outline outline-2 black radius-xl">Xem full giá phụ kiện</nuxt-link>
               </button>
             </div>
           </div>

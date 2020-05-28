@@ -114,13 +114,13 @@
                             <a href="javascript:void(0);">beauty</a>
                           </div>
                           <h4 class="title">
-                            <router-link :to="{path: 'posing'}">Làm đẹp cùng Classic</router-link>
+                            <router-link :to="{path: '/bai-viet/tao-dang'}">Làm đẹp cùng Classic</router-link>
                           </h4>
                           <p>Để bắt đầu 1 ngày chụp kỉ yếu thật sự chỉnh chu, các nàng cũng như các chàng có thể lướt qua list bài tổng hợp về cách trang điểm, pose dáng tại đây. Hãy nghiên cứu thật kỹ, để cùng chúng tớ tạo nên bộ hình đẹp nhất nhé!</p>
                         </div>
                         <div class="load-more-btn text-center">
                           <router-link
-                            :to="{path: 'posing'}"
+                            :to="{path: '/bai-viet/tao-dang'}"
                             class="btn outline outline-2 black radius-xl"
                           >Load More</router-link>
                         </div>
@@ -134,18 +134,18 @@
                         </div>
                         <div class="blog-card-info">
                           <div class="title-sm">
-                            <a href="javascript:void(0);">beauty</a>
+                            <a href="javascript:void(0);">Trang trí</a>
                           </div>
                           <h4 class="title">
-                            <a href="">Trang trí ngoại cảnh</a>
+                            <nuxt-link :to="'/san-pham/trang-tri'">Trang trí ngoại cảnh</nuxt-link>
                           </h4>
                           <p>The Classic luôn hướng đến sự chỉnh chu trong từng khâu chuẩn bị, và "trang trí" là một trong những khâu không thể thiếu, nếu bạn muốn bộ ảnh của lớp mình độc nhất vô nhị! Các bạn có thể tham khảo và cùng nhau làm hoặc thuê chúng tớ hỗ trợ!</p>
                         </div>
                         <div class="load-more-btn text-center">
-                          <a
-                            href=""
+                          <nuxt-link
+                            :to="'/san-pham/trang-tri'"
                             class="btn outline outline-2 black radius-xl"
-                          >Load More</a>
+                          >Load More</nuxt-link>
                         </div>
                       </div>
                       <hr>
@@ -157,18 +157,18 @@
                         </div>
                         <div class="blog-card-info">
                           <div class="title-sm">
-                            <a href="javascript:void(0);">beauty</a>
+                            <a href="javascript:void(0);">HISCHOOL STORIES</a>
                           </div>
                           <h4 class="title">
-                            <a href="">Seri "Friend Forever"</a>
+                            <nuxt-link :to="'/san-pham/hischool-stories'">Seri "Friend Forever"</nuxt-link>
                           </h4>
                           <p>Ảnh kỷ yếu là những gì người ta ghi lại, để lưu giữ những kỉ niệm với bạn bè trong những tháng năm cùng nhau học tập. Những bộ ảnh đó đều có ý nghĩa rất lớn đối với những ai đã và đang là học sinh, sinh viên. Những buổi học dưới mái trường thân yêu đã và đang lặng lẽ dần trôi nhanh theo thời gian. Rồi mùa hè cũng tới, mùa tốt nghiệp, mùa của những ngày tháng chia tay, để lại sự tiếc nuối của những người bạn sớm nắng chiều mưa hàng ngày cắp sách tới trường và của những người bạn thân yêu nay phải rời xa giảng đường thầy cô. Để lưu lại khoảnh khắc đó, chúng tớ lưu lại đây những bộ ảnh kỉ yếu đầy màu sắc và tiếng cười cùng những thông điệp tình bạn!</p>
                         </div>
                         <div class="load-more-btn text-center">
-                          <a
-                            href=""
+                          <nuxt-link
+                            :to="'/san-pham/hischool-stories'"
                             class="btn outline outline-2 black radius-xl"
-                          >Load More</a>
+                          >Load More</nuxt-link>
                         </div>
                       </div>
                       <hr>

@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col-xl-9 col-lg-8 col-md-7 col-sm-12 col-12">
               <div class="section-head text-center">
-                <div class="title-sm">Fashion</div>
+                <!-- <div class="title-sm">Fashion</div> -->
                 <h2 class="title-head">{{article.name}}</h2>
               </div>
               <div class="blog-post blog-single blog-post-style-2 sidebar">

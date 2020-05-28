@@ -74,7 +74,8 @@ module.exports = {
     ],
     script: [
       { src: 'https://use.fontawesome.com/ce16520130.js', defer: true  },
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' }
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' },
+      // { src: 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=884618848377974&autoLogAppEvents=1', crossorigin: 'anonymous', defer: true, async: true  },
     ],
   },
   /*
@@ -89,7 +90,9 @@ module.exports = {
     '@/plugins/vue-plyr',
     '@/plugins/vue-inject.js',
     { src: '@/plugins/slick-slide', ssr: false },
-    { src: '@/plugins/owl-carousel.js', ssr: false }
+    { src: '@/plugins/owl-carousel.js', ssr: false },
+    { src: '@/plugins/fb-sdk.js', ssr: false },
+    // { src: '@/plugins/isotope.js', ssr: false},
   ],
   /*
   ** Global CSS

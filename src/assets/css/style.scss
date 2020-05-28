@@ -85,3 +85,18 @@ span {
   padding: 20px 0;
   background-color: #f0f0f0;
 }
+.ckeditor-description {
+  figure {
+    text-align: center;
+    padding: 10px 10px 0 10px;
+    border-radius: 10px;
+    img {
+      padding: 10px 10px;
+      max-height: 70vh;
+      background-color: #f9f9f9;
+    }
+    figcaption {
+      font-style: italic;
+    }
+  }
+}
