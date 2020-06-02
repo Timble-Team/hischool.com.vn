@@ -21,7 +21,7 @@
                         </div>
                       </slick>
                     </no-ssr>
-                    <div id="myDiv"></div>
+                    <div id="myDiv" class="ckeditor-description"></div>
                   </div>
                   <div class="blog-card-info style-1 no-bdr">
                     <div class="date">{{article.createdAt.toDate() | dateFormat}}</div>
@@ -62,15 +62,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="post-btn" v-if="relatedArticles.length === 2">
-                  <div class="prev-post">
+                <div class="post-btn">
+                  <div class="prev-post" v-if="relatedArticles[0]">
                     <img :src="relatedArticles[0].cover.url" :alt="relatedArticles[0].name" />
                     <h6 class="title">
                       <nuxt-link :to="relatedArticles[0].link">{{relatedArticles[0].name}}</nuxt-link>
                       <span class="post-date">{{relatedArticles[0].createdAt.toDate() | dateFormat}}</span>
                     </h6>
                   </div>
-                  <div class="next-post">
+                  <div class="next-post" v-if="relatedArticles[1]">
                     <h6 class="title">
                       <nuxt-link :to="relatedArticles[1].link">{{relatedArticles[1].name}}</nuxt-link>
                       <span class="post-date">{{relatedArticles[1].createdAt.toDate() | dateFormat}}</span>
@@ -145,7 +145,6 @@ export default {
   },
   computed: {
     slugs() {
-      console.log(this.$store.state.slugs)
       return this.$store.state.slugs
     }
   },
@@ -153,17 +152,19 @@ export default {
     async getArticle() {
       const articleRef = await this.$fireStore.collection('articles').doc(this.routeId).get()
       this.article = this.$common.convertDocumentRecord(articleRef)
-      this.convertHTML()
+      setTimeout(() => this.convertHTML())
       this.getSuggestArticles(articleRef)
     },
     async getSuggestArticles(ref) {
       const articlesRef = await this.$fireStore.collection('articles')
-        .startAfter(ref)
-        .limit(2).get()
-      this.relatedArticles = this.$common.convertCollectionRecord(articlesRef).map(x => ({
-        ...x,
-        link: x.link ? x.link : `/bai-viet/${this.slugs[x.kind]}/${this.$options.filters.convertVie(x.name, x.id)}`
-      }))
+        .where('kind', '==', this.article.kind)
+        .limit(3).get()
+      this.relatedArticles = this.$common.convertCollectionRecord(articlesRef)
+        .filter(x => x.id !== this.article.id)
+        .map(x => ({
+          ...x,
+          link: x.link ? x.link : `/bai-viet/${this.slugs[x.kind]}/${this.$options.filters.convertVie(x.name, x.id)}`
+        }))
     },
     convertHTML() {
       $('#myDiv').html(this.article.content)

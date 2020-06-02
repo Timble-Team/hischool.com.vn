@@ -5,9 +5,11 @@ export const state = () => ({
   slugs: {
     'tao-dang': '3',
     'huong-dan': '4',
+    'dia-diem-chup-hinh': '5',
     'idea': '1',
     '3':'tao-dang',
     '4': 'huong-dan',
+    '5': 'dia-diem-chup-hinh',
     '1': 'idea'
   }
 })

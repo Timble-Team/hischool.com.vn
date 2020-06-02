@@ -5,6 +5,8 @@
         <div class="cp-heading-holder text-center col-lg-12">
           <div class="align-center">
             <h3 class="title-price">Videos</h3>
+             <p>Chuyên mục sản phẩm video của team Hischool - Kỷ yếu Đà Nẵng - Huế - Quảng Nam - Quảng Ngãi - Quảng Trị - Hội An.</p>
+             <p>Xem thêm nhiều video hơn tại <a target="_blank" href="https://facebook.com/classic.yearbook">đây</a></p>
           </div>
         </div>
         <div class="row">
