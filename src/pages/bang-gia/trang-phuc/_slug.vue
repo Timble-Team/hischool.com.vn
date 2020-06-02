@@ -123,9 +123,13 @@ export default {
       return this.$store.state.clothes
     }
   },
+  async asyncData ({ app, params }) {
+    const routeId = params.slug.split('-').slice(-1)[0]
+    const clothRef = await app.$fireStore.collection('clothes').doc(routeId).get()
+    const mainCloth = app.$common.convertDocumentRecord(clothRef)
+    return { mainCloth, routeId }
+  },
   created () {
-    this.routeId = this.$route.params.slug.split('-').slice(-1)[0]
-    this.getCloth()
     this.getSuggestClothes()
     // this.mainCloth = this.$route.meta.product.find(x => x.parent_id === null)
     // this.relatedCloth = this.$route.meta.product.filter(x => x.parent_id !== null)
@@ -172,10 +176,6 @@ export default {
   //   })
   // },
   methods: {
-    async getCloth() {
-      const clothRef = await this.$fireStore.collection('clothes').doc(this.routeId).get()
-      this.mainCloth = this.$common.convertDocumentRecord(clothRef)
-    },
     async getSuggestClothes() {
       const allClothesWithoutCurrentId = this.clothes.filter(x => x.id !== this.routeId)
       const shuffleClothes = this.$common.shuffle(allClothesWithoutCurrentId)
