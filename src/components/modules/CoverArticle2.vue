@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="col-3">
-          <p class="price-blog"><span>{{article.priceUnder20}}K</span></p>
+          <p class="price-blog"><span>{{article.priceOver20}}K</span></p>
         </div>
       </div>
       <p class="article-accessories" v-if="!shortcut">

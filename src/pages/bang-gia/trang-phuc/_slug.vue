@@ -1,7 +1,7 @@
 <template>
   <div class="page-content bg-white">
     <div class="content-block">
-      <div class="section-full content-inner bg-white" v-if="mainCloth" style="width: 1440px">
+      <div class="section-full content-inner bg-white" v-if="mainCloth">
         <h3 class="title-price text-center">{{mainCloth.name}}</h3>
         <no-ssr>
           <slick
@@ -68,6 +68,15 @@ export default {
   components: {
     Sidebar,
     CoverArticle
+  },
+  head () {
+    return {
+      title: this.mainCloth.name,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        { hid: 'description', name: 'description', content: this.mainCloth.desc }
+      ]
+    }
   },
   data () {
     return {
