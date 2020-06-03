@@ -22,7 +22,7 @@
                       </slick>
                     </no-ssr>
                     <div class="ckeditor-description" v-html="article.desc"></div>
-                    <div id="myDiv" class="ckeditor-description"></div>
+                    <div id="myDiv" class="ckeditor-description" v-html="article.content"></div>
                   </div>
                   <div class="blog-card-info style-1 no-bdr">
                     <div class="date">{{article.createdAt | dateFormat}}</div>
@@ -152,7 +152,6 @@ export default {
     }
   },
   mounted () {
-    this.convertHTML()
     this.getSuggestArticles()
   },
   computed: {
@@ -171,14 +170,6 @@ export default {
           ...x,
           link: x.link ? x.link : `/bai-viet/${this.slugs[x.kind]}/${this.$options.filters.convertVie(x.name, x.id)}`
         }))
-    },
-    convertHTML() {
-      $('#myDiv').html(this.article.content)
-      $('#myDiv p:has(img) img').each((index, obj) => {
-        let srcChange = this.$options.filters.takeImage($(obj).attr('src'))
-        $(obj).attr('src', srcChange)
-        $('p:has(img)').css({ textAlign: 'center' })
-      })
     }
   }
 }
