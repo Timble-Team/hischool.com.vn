@@ -73,8 +73,8 @@ export default {
     return {
       title: this.mainCloth.name,
       meta: [
-        { hid: 'description', name: 'description', content: this.mainCloth.desc },
-        { hid: 'og:description', name: 'og:description', content: this.mainCloth.desc },
+        { hid: 'description', name: 'description', content: `${this.mainCloth.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
+        { hid: 'og:description', name: 'og:description', content: `${this.mainCloth.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
         { hid: 'og:image', name: 'og:image', content: this.mainCloth.cover[1].url },
       ]
     }
