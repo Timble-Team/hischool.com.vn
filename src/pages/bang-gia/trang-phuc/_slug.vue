@@ -71,7 +71,7 @@ export default {
   },
   head () {
     return {
-      title: `${this.mainCloth.name} - `,
+      title: `${this.mainCloth.name} -`,
       meta: [
         { name: 'description', content: `${this.mainCloth.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
         { name: 'og:description', content: `${this.mainCloth.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
