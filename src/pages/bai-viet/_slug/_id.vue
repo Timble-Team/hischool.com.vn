@@ -106,7 +106,7 @@ export default {
       meta: [
         { name: 'description', content: `${this.article.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
         { name: 'og:description', content: `${this.article.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
-        { name: 'og:image', content: this.article.cover.url },
+        { hid: 'og:image', name: 'og:image', content: this.article.cover.url },
         { name: 'og:image:url', content: this.article.cover.url },
       ]
     }

@@ -77,7 +77,7 @@ export default {
       meta: [
         { name: 'description', content: `${this.mainCloth.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
         { name: 'og:description', content: `${this.mainCloth.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
-        { name: 'og:image', content: this.mainCloth.cover[1].url },
+        { hid: 'og:image', name: 'og:image', content: this.mainCloth.cover[1].url },
         { name: 'og:image:url', content: this.mainCloth.cover[1].url },
       ]
     }

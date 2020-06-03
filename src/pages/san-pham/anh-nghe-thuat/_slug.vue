@@ -47,7 +47,7 @@ export default {
       meta: [
         { name: 'description', content: `${this.album.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
         { name: 'og:description', content: `${this.album.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
-        { name: 'og:image', content: this.album.cover.url },
+        { hid: 'og:image', name: 'og:image', content: this.album.cover.url },
         { name: 'og:image:url', content: this.album.cover.url },
       ]
     }
