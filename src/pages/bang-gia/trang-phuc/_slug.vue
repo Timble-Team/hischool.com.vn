@@ -73,8 +73,8 @@ export default {
     return {
       title: this.mainCloth.name,
       meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        { hid: 'description', name: 'description', content: this.mainCloth.desc }
+        { hid: 'description', name: 'description', content: this.mainCloth.desc },
+        { hid: 'og:image', name: 'og:image', content: this.mainCloth.cover[1].url }
       ]
     }
   },
