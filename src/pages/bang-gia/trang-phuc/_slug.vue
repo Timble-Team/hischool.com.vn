@@ -74,7 +74,8 @@ export default {
       title: this.mainCloth.name,
       meta: [
         { hid: 'description', name: 'description', content: this.mainCloth.desc },
-        { hid: 'og:image', name: 'og:image', content: this.mainCloth.cover[1].url }
+        { hid: 'og:description', name: 'og:description', content: this.mainCloth.desc },
+        { hid: 'og:image', name: 'og:image', content: this.mainCloth.cover[1].url },
       ]
     }
   },

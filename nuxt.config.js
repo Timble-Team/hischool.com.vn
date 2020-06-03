@@ -66,7 +66,8 @@ module.exports = {
       { name: 'mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-title', content: 'Avatar' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'og:site_name', name: 'og:site_name', content: 'Kỷ yếu trọn gói Hischool' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
