@@ -24,7 +24,7 @@
                     <div id="myDiv" class="ckeditor-description" v-html="album.content"></div>
                   </div>
                   <div class="blog-card-info style-1 no-bdr">
-                    <div class="date">{{album.createdAt.toDate() | dateFormat}}</div>
+                    <div class="date">{{album.createdAt | dateFormat}}</div>
                   </div>
                 </div>
               </div>
@@ -41,10 +41,28 @@ import CoverArticle from '@/components/modules/CoverArticle3.vue'
 import CommonSidebar from '@/common-layouts/sidebar.vue'
 
 export default {
+  head () {
+    return {
+      title: `${this.album.name} -`,
+      meta: [
+        { name: 'description', content: `${this.album.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
+        { name: 'og:description', content: `${this.album.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
+        { name: 'og:image', content: this.album.cover.url },
+        { name: 'og:image:url', content: this.album.cover.url },
+      ]
+    }
+  },
+  async asyncData ({ app, params }) {
+    const routeId = params.slug.split('-').slice(-1)[0]
+    const albumRef = await app.$fireStore.collection('albums').doc(routeId).get()
+    const album = app.$common.convertDocumentRecord(albumRef)
+    album.createdAt = album.createdAt.toDate()
+    return { album, routeId }
+  },
   data() {
     return {
-      album: null,
-      routeId: null,
+      // album: null,
+      // routeId: null,
       slickOptions: {
         infinite: true,
         dots: false,
@@ -80,16 +98,7 @@ export default {
     CommonSidebar
   },
   mounted() {
-    this.getAlbum()
-  },
-  created () {
-    this.routeId = this.$route.params.slug.split('-').slice(-1)[0]
-  },
-  methods: {
-    async getAlbum() {
-      const albumRef = await this.$fireStore.collection('albums').doc(this.routeId).get()
-      this.album = this.$common.convertDocumentRecord(albumRef)
-    }
+    // console.log(this.album.createdAt.toDate())
   }
 }
 </script>

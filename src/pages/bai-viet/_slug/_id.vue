@@ -21,10 +21,11 @@
                         </div>
                       </slick>
                     </no-ssr>
+                    <div class="ckeditor-description" v-html="article.desc"></div>
                     <div id="myDiv" class="ckeditor-description"></div>
                   </div>
                   <div class="blog-card-info style-1 no-bdr">
-                    <div class="date">{{article.createdAt.toDate() | dateFormat}}</div>
+                    <div class="date">{{article.createdAt | dateFormat}}</div>
                   </div>
                 </div>
               </div>
@@ -99,13 +100,26 @@ export default {
     CommonSidebar,
     Carousel
   },
+  head () {
+    return {
+      title: `${this.article.name} -`,
+      meta: [
+        { name: 'description', content: `${this.article.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
+        { name: 'og:description', content: `${this.article.desc.replace(/(<([^>]+)>)/ig,"").slice(0, 197)}...` },
+        { name: 'og:image', content: this.article.cover.url },
+        { name: 'og:image:url', content: this.article.cover.url },
+      ]
+    }
+  },
+  async asyncData ({ app, params }) {
+    const routeId = params.id.split('-').slice(-1)[0]
+    const articleRef = await app.$fireStore.collection('articles').doc(routeId).get()
+    const article = app.$common.convertDocumentRecord(articleRef)
+    article.createdAt = article.createdAt.toDate()
+    return { article, routeId }
+  },
   data () {
     return {
-      routeId: null,
-      sync1: null,
-      sync2: null,
-      syncedSecondary: true,
-      article: null,
       relatedArticles: [],
       slickOptions: {
         infinite: true,
@@ -138,10 +152,8 @@ export default {
     }
   },
   mounted () {
-    this.getArticle()
-  },
-  created () {
-    this.routeId = this.$route.params.id.split('-').slice(-1)[0]
+    this.convertHTML()
+    this.getSuggestArticles()
   },
   computed: {
     slugs() {
@@ -149,13 +161,7 @@ export default {
     }
   },
   methods: {
-    async getArticle() {
-      const articleRef = await this.$fireStore.collection('articles').doc(this.routeId).get()
-      this.article = this.$common.convertDocumentRecord(articleRef)
-      setTimeout(() => this.convertHTML())
-      this.getSuggestArticles(articleRef)
-    },
-    async getSuggestArticles(ref) {
+    async getSuggestArticles() {
       const articlesRef = await this.$fireStore.collection('articles')
         .where('kind', '==', this.article.kind)
         .limit(3).get()

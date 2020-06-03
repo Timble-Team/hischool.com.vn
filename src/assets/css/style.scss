@@ -99,4 +99,11 @@ span {
       font-style: italic;
     }
   }
+  a {
+    color: #7dc0d1;
+    font-weight: bold;
+    &:hover {
+      color: #1d7f8c;
+    }
+  }
 }
