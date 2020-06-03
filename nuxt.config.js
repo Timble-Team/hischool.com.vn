@@ -57,7 +57,7 @@ module.exports = {
     // measurementId: process.env.measurementId
   },
   head: {
-    title: 'Hischool - Kỉ yếu Đà Nẵng - chụp ảnh - quay phim - cho thuê trang phục kỉ yếu',
+    titleTemplate: '%s - Kỉ yếu Hischool Đà Nẵng - chụp ảnh - quay phim - cho thuê trang phục kỉ yếu',
     description: 'Hischool là đơn vị bao trọn gói combo chụp ảnh tại Đà Nẵng - Quảng Nam - Huế - các tỉnh miền Trung. Đầy đủ các dịch vụ từ chụp, quay, cho thuê trang phục, phụ kiện, decor thiết kế.',
     meta: [
       { charset: 'utf-8' },
@@ -66,13 +66,12 @@ module.exports = {
       { name: 'mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-title', content: 'Kỷ yếu trọn gói Hischool' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'description', name: 'description', content: 'Chuyên chụp - quay - trang phục kỷ yếu tại Đà Nẵng - Huế - Quảng Nam - Hội An - Quảng Trị - Quảng Ngãi' },
       { hid: 'og:site_name', name: 'og:site_name', content: 'Kỷ yếu trọn gói Hischool' },
       { hid: 'og:description', name: 'og:description', content: process.env.npm_package_description || '' },
       { hid: 'og:image', name: 'og:image', content: '/main.jpg' },
       { hid: 'og:image:alt', name: 'og:image:alt', content: 'Kỷ yếu trọn gói Hischool' },
-      { hid: 'og:type', name: 'og:type', content: 'website' },
-      { hid: 'og:title', name: 'og:title', content: 'Hischool - Kỉ yếu Đà Nẵng - chụp ảnh - quay phim - cho thuê trang phục kỉ yếu' },
+      { hid: 'og:type', name: 'og:type', content: 'website' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
