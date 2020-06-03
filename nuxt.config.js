@@ -57,7 +57,7 @@ module.exports = {
     // measurementId: process.env.measurementId
   },
   head: {
-    titleTemplate: '%s - Kỉ yếu Hischool Đà Nẵng - chụp ảnh - quay phim - cho thuê trang phục kỉ yếu',
+    titleTemplate: '%s Kỉ yếu Hischool Đà Nẵng',
     description: 'Hischool là đơn vị bao trọn gói combo chụp ảnh tại Đà Nẵng - Quảng Nam - Huế - các tỉnh miền Trung. Đầy đủ các dịch vụ từ chụp, quay, cho thuê trang phục, phụ kiện, decor thiết kế.',
     meta: [
       { charset: 'utf-8' },
