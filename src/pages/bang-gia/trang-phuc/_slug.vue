@@ -46,7 +46,7 @@
                   Trang phục có thể bạn quan tâm
                 </h5>
                 <div class="row">
-                  <div class="col-lg-6" v-for="(item, index) of suggestClothes" :key="`a${index}`">
+                  <div class="col-lg-6" v-for="(item, index) of clothes" :key="`a${index}`">
                     <CoverArticle :article="item" :shortcut="true"/>
                   </div>
                 </div>
@@ -124,7 +124,12 @@ export default {
   },
   computed: {
     clothes () {
-      return this.$store.state.clothes
+      const allClothesWithoutCurrentId = this.$store.state.clothes.filter(x => x.id !== this.routeId)
+      const shuffleClothes = this.$common.shuffle(allClothesWithoutCurrentId)
+      return shuffleClothes.slice(0, 4).map(x => ({
+        ...x,
+        link: x.link? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
+      }))
     }
   },
   async asyncData ({ app, params }) {
@@ -132,17 +137,6 @@ export default {
     const clothRef = await app.$fireStore.collection('clothes').doc(routeId).get()
     const mainCloth = app.$common.convertDocumentRecord(clothRef)
     return { mainCloth, routeId }
-  },
-  created () {
-    this.getSuggestClothes()
-    // this.mainCloth = this.$route.meta.product.find(x => x.parent_id === null)
-    // this.relatedCloth = this.$route.meta.product.filter(x => x.parent_id !== null)
-    // this.suggestCloth = this.$route.meta.suggestProduct.map(x => ({
-    //   image: x.images[0] ? this.$options.filters.takeImage(x.images[0].name.url) : null,
-    //   title: x.name,
-    //   nameRoute: 'priceClothesDetail',
-    //   paramsRoute: { id: x.id }
-    // })).slice(0, 4)
   },
   // mounted () {
   //   this.product1 = $('#product1')
@@ -180,14 +174,6 @@ export default {
   //   })
   // },
   methods: {
-    async getSuggestClothes() {
-      const allClothesWithoutCurrentId = this.clothes.filter(x => x.id !== this.routeId)
-      const shuffleClothes = this.$common.shuffle(allClothesWithoutCurrentId)
-      this.suggestClothes = shuffleClothes.slice(0, 4).map(x => ({
-        ...x,
-        link: x.link? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
-      }))
-    },
   //   syncPosition (el) {
   //     var count = el.item.count - 1
   //     var current = Math.round(el.item.index - (el.item.count / 2) - 0.5)
