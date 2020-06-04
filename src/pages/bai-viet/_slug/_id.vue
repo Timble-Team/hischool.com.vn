@@ -12,7 +12,7 @@
               <div class="blog-post blog-single blog-post-style-2 sidebar">
                 <div class="dlab-post-info">
                   <div class="dlab-post-text text">
-                    <no-ssr>
+                    <no-ssr v-if="article.attachments.length > 0">
                       <slick
                         ref="slick"
                         :options="slickOptions">
