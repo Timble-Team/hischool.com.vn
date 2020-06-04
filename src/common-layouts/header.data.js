@@ -82,7 +82,11 @@ export class HeaderData {
           },
           {
             name: 'Tạo dáng',
-            path: '/bai-viet/pose-dang',
+            path: '/bai-viet/tao-dang',
+          },
+          {
+            name: 'Trang điểm',
+            path: '/bai-viet/make-up',
           },
           {
             name: 'Địa điểm lý tưởng',

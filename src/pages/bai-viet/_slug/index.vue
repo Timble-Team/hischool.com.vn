@@ -21,7 +21,7 @@ import CommonSidebar from '@/common-layouts/sidebar.vue'
 export default {
   validate ({ params }) {
     // Must be a number
-    return /(tao-dang)|(huong-dan)|(idea)|(dia-diem-chup-hinh)/.test(params.slug)
+    return /(tao-dang)|(huong-dan)|(idea)|(dia-diem-chup-hinh)|(make-up)/.test(params.slug)
   },
   name: 'Articles',
   components: {

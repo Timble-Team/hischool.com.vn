@@ -15,7 +15,7 @@
     <div v-if="+price.type == 0" class="price-holder">
       <div>
         <template v-if="price.price">
-          <p><b style="color: #f7d1aa;">{{price.priceFirst}}k/<i class="ti-user"></i></b> cho 30 người đầu tiên</p>
+          <p><b style="color: #f5c18e;">{{price.priceFirst}}k/<i class="ti-user"></i></b> cho 30 người đầu tiên</p>
           <p>từ người thứ 31 chỉ còn</p>
           <b class="price-num">{{price.price}}<sup>K</sup>
           <span><i class="ti-user"></i></span></b>
@@ -87,7 +87,7 @@ export default {
   font-size: 40px;
   font-family: 'Anton', sans-serif;
   letter-spacing: 1.5px;
-  color: #f7d1aa;
+  color: #f5c18e;
 }
 .main-bg-price {
   // background: linear-gradient(to top right, #ddb958 0%, #e5c66b 100%);
@@ -152,7 +152,7 @@ export default {
 }
 
 .green-color {
-  color: grey;
+  color: #0e0e0e;
   &:hover {
     color: #9ACD32;
   }

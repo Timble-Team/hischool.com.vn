@@ -6,11 +6,13 @@ export const state = () => ({
     'tao-dang': '3',
     'huong-dan': '4',
     'dia-diem-chup-hinh': '5',
+    'make-up': '6',
     'idea': '1',
     '3':'tao-dang',
     '4': 'huong-dan',
     '5': 'dia-diem-chup-hinh',
-    '1': 'idea'
+    '1': 'idea',
+    '6': 'make-up'
   }
 })
 
