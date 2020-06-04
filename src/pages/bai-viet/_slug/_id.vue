@@ -116,6 +116,7 @@ export default {
     const articleRef = await app.$fireStore.collection('articles').doc(routeId).get()
     const article = app.$common.convertDocumentRecord(articleRef)
     article.createdAt = article.createdAt.toDate()
+    article.attachments = article.attachments ? article.attachments : []
     return { article, routeId }
   },
   data () {
