@@ -8,7 +8,7 @@
             ref="slick"
             :options="slickOptions">
             <div class="item" v-for="(image, index) of mainCloth.images" :key="index">
-              <img class="cloth-img" :src="image.url" :alt="mainCloth.name">
+              <img class="cloth-img" :src="image.url" :alt="mainCloth.name" @click="setLightbox(mainCloth.images, index)">
             </div>
           </slick>
         </no-ssr>
@@ -84,18 +84,14 @@ export default {
   },
   data () {
     return {
-      mainCloth: null,
-      routeId: null,
-
       slickOptions: {
         infinite: true,
         dots: false,
-        arrows: false,
-        autoplay: true,
-        autoplaySpeed: 1500,
+        arrows: true,
+        autoplay: false,
         // centerMode: true,
         slidesToShow: 1,
-        slidesToScroll: 3,
+        slidesToScroll: 2,
         variableWidth: true,
         speed: 1000,
         // responsive: [
@@ -117,9 +113,6 @@ export default {
       },
       // relatedCloth: [],
       suggestClothes: [],
-      // syncedSecondary: true,
-      // product1: null,
-      // product2: null
     }
   },
   computed: {
@@ -138,72 +131,11 @@ export default {
     const mainCloth = app.$common.convertDocumentRecord(clothRef)
     return { mainCloth, routeId }
   },
-  // mounted () {
-  //   this.product1 = $('#product1')
-  //   this.product2 = $('#product2')
-  //   var slidesPerPage = 3
-
-  //   this.product1.owlCarousel({
-  //     items: 1,
-  //     slideSpeed: 2000,
-  //     nav: true,
-  //     autoplay: false,
-  //     dots: false,
-  //     loop: true,
-  //     responsiveRefreshRate: 200,
-  //     navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
-  //   }).on('changed.owl.carousel', this.syncPosition)
-
-  //   this.product2.on('initialized.owl.carousel', () => {
-  //     this.product2.find('.owl-item').eq(0).addClass('current')
-  //   }).owlCarousel({
-  //     items: slidesPerPage,
-  //     dots: false,
-  //     nav: false,
-  //     margin: 10,
-  //     smartSpeed: 200,
-  //     slideSpeed: 500,
-  //     slideBy: slidesPerPage,
-  //     responsiveRefreshRate: 100
-  //   }).on('changed.owl.carousel', this.syncPosition2)
-
-  //   this.product2.on('click', '.owl-item', function (e) {
-  //     e.preventDefault()
-  //     var number = $(this).index()
-  //     $('#product1').data('owl.carousel').to(number, 300, true)
-  //   })
-  // },
   methods: {
-  //   syncPosition (el) {
-  //     var count = el.item.count - 1
-  //     var current = Math.round(el.item.index - (el.item.count / 2) - 0.5)
-  //     if (current < 0) {
-  //       current = count
-  //     }
-  //     if (current > count) {
-  //       current = 0
-  //     }
-  //     this.product2
-  //       .find('.owl-item')
-  //       .removeClass('current')
-  //       .eq(current)
-  //       .addClass('current')
-  //     var onscreen = this.product2.find('.owl-item.active').length - 1
-  //     var start = this.product2.find('.owl-item.active').first().index()
-  //     var end = this.product2.find('.owl-item.active').last().index()
-  //     if (current > end) {
-  //       this.product2.data('owl.carousel').to(current, 100, true)
-  //     }
-  //     if (current < start) {
-  //       this.product2.data('owl.carousel').to(current - onscreen, 100, true)
-  //     }
-  //   },
-  //   syncPosition2 (el) {
-  //     if (this.syncedSecondary) {
-  //       var number = el.item.index
-  //       this.product1.data('owl.carousel').to(number, 100, true)
-  //     }
-  //   }
+    setLightbox(images, index) {
+      const imagesMapping = images.map(x => ({src: x.url, title: this.mainCloth.name}))
+      this.$store.commit('setLightbox', {items: imagesMapping, index})
+    }
   }
 }
 </script>
@@ -225,7 +157,6 @@ export default {
   }
 }
 .cloth-img {
-  height: 400px;
   padding: 0 2px;
 }
 </style>

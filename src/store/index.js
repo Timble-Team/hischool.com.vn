@@ -2,6 +2,8 @@ export const state = () => ({
   categories: [],
   clothes: [],
   accessories: [],
+  lightboxItems: [],
+  lightboxCurrentItem: null,
   slugs: {
     'tao-dang': '3',
     'huong-dan': '4',
@@ -25,6 +27,11 @@ export const mutations = {
   },
   setAccessories (state, accessories = []) {
     state.accessories = accessories
+  },
+  setLightbox (state, payload = {items: [], index: null}) {
+    console.log(payload)
+    state.lightboxItems = payload.items
+    state.lightboxCurrentItem = payload.index
   },
 }
 

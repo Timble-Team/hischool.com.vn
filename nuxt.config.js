@@ -94,6 +94,7 @@ module.exports = {
     '@/middleware/filter',
     '@/plugins/vue-plyr',
     '@/plugins/vue-inject.js',
+    '@/plugins/cool-light-box',
     { src: '@/plugins/slick-slide', ssr: false },
     { src: '@/plugins/owl-carousel.js', ssr: false },
     { src: '@/plugins/fb-sdk.js', ssr: false },

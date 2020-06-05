@@ -1,5 +1,10 @@
 <template>
   <div>
+    <LightBox
+      :items="items"
+      :index="indexCool"
+      @close="closeCoolBox()">
+    </LightBox>
     <div id="fb-root"></div>
     <app-header/>
     <nuxt />
@@ -27,7 +32,18 @@ export default {
   },
   mounted() {
   },
+  computed: {
+    items() {
+      return this.$store.state.lightboxItems
+    },
+    indexCool() {
+      return this.$store.state.lightboxCurrentItem
+    }
+  },
   methods: {
+    closeCoolBox () {
+      this.$store.commit('setLightbox', {items: [], index: null})
+    },
     scrollTop() {
       window.scrollTo({top: 0, behavior: 'smooth'})
     },
