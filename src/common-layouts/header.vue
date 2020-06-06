@@ -23,7 +23,7 @@
               <div v-show="sidebarParams" class="header-nav navbar-collapse justify-content-center">
                 <div class="logo-header">
                   <a href="/">
-                    <img src="../assets/images/logo-white.png" alt style="width: 200px" />
+                    <img src="../assets/images/logo-white.png" alt style="width: 120px" />
                   </a>
                 </div>
                 <ul class="nav navbar-nav">
@@ -79,12 +79,7 @@
                 <div class="social-menu">
                   <ul>
                     <li>
-                      <a href="https://fb.com/classic.yearbook">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="javascript:void(0);">
+                      <a target="_blank" href="https://fb.com/classic.yearbook">
                         <i class="fa fa-facebook"></i>
                       </a>
                     </li>
