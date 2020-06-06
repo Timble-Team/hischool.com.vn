@@ -9,7 +9,7 @@
                 <div class="text-center section-head">
                   <h1 class="title-head1">About Us</h1>
                   <div class="widget">
-                    <img src="../../assets/images/logo.png" alt />
+                    <img class="main-logo" src="../../assets/images/logo.png" alt />
                   </div>
                 </div>
                 <div class="alignwide">

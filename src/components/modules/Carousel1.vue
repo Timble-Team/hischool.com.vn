@@ -57,7 +57,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .blog-card-media {
   padding: 0 2px;
 }

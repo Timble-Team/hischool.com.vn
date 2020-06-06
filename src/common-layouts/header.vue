@@ -6,7 +6,7 @@
           <div class="header-content-bx no-bdr">
             <div class="logo-header">
               <a href="/">
-                <img src="../assets/images/logo.png" alt />
+                <img class="main-logo" src="../assets/images/logo.png" alt />
               </a>
             </div>
             <button

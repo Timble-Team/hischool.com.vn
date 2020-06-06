@@ -175,7 +175,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .article-img {
   height: 400px;
   padding: 0 2px;

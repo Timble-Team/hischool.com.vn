@@ -68,13 +68,13 @@ module.exports = {
       { name: 'apple-mobile-web-app-title', content: 'Kỷ yếu trọn gói Hischool' },
       { hid: 'description', name: 'description', content: 'Chuyên chụp - quay - trang phục kỷ yếu tại Đà Nẵng - Huế - Quảng Nam - Hội An - Quảng Trị - Quảng Ngãi' },
       { hid: 'og:site_name', name: 'og:site_name', content: 'Kỷ yếu trọn gói Hischool' },
-      { hid: 'og:description', name: 'og:description', content: process.env.npm_package_description || '' },
+      { hid: 'og:description', name: 'og:description', content: 'Hischool là đơn vị bao trọn gói combo chụp ảnh tại Đà Nẵng - Quảng Nam - Huế - các tỉnh miền Trung. Đầy đủ các dịch vụ từ chụp, quay, cho thuê trang phục, phụ kiện, decor thiết kế.' },
       { hid: 'og:image', name: 'og:image', content: '/main.jpg' },
       { hid: 'og:image:alt', name: 'og:image:alt', content: 'Kỷ yếu trọn gói Hischool' },
       { hid: 'og:type', name: 'og:type', content: 'website' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icnon', type: 'image/x-icon', href: '/favicon.png' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Inconsolata:400,700|Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i|Maven+Pro:400,500,700,900|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' }
     ],
     script: [

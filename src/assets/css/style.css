@@ -10852,8 +10852,9 @@ footer h6 a {
 footer p,
 footer strong,
 footer b,
+footer span,
 footer {
-    color: #fff;
+  color: #fff;
 }
 footer h1 a,
 footer h2 a,

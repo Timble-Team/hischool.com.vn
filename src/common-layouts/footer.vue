@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-xl-4 col-lg-4 col-md-12">
             <div class="widget">
-              <img src="../assets/images/logo-white.png" alt />
+              <img class="main-logo" src="../assets/images/logo-white.png" alt />
             </div>
             <p>
             <b>Địa chỉ: </b><span>42-43 Tống Phước Phổ St., Hai Chau Dist, Da Nang City</span><br>
