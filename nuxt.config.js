@@ -98,6 +98,7 @@ module.exports = {
     { src: '@/plugins/slick-slide', ssr: false },
     { src: '@/plugins/owl-carousel.js', ssr: false },
     { src: '@/plugins/fb-sdk.js', ssr: false },
+    { src: '~plugins/ga.js', mode: 'client' }
     // { src: '@/plugins/isotope.js', ssr: false},
   ],
   /*
