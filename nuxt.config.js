@@ -47,6 +47,7 @@ module.exports = {
     vendor: ['wowjs']
   },
   env: {
+    VUE_APP_API: 'https://api.hischool.com.vn/api/v1'
     // apiKey: process.env.apiKey,
     // authDomain: process.env.authDomain,
     // databaseURL: process.env.databaseURL,

@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     submitCode () {
-      this.$router.push({ name: 'viewer', params: { id: this.code } })
+      this.$router.push({ path: `/albums/${this.code}` })
     }
   }
 }

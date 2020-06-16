@@ -74,7 +74,7 @@ export default {
     if (this.$route.query.pictureId && this.$route.query.pos && this.$route.query.page >= 0) {
       this.currentPictureId = this.$route.query.pictureId || null
     }
-    api.get(['api', 'contracts', this.$route.params.code, 'viewers', 'public_index']).then(res => {
+    api.get(['contracts', this.$route.params.code, 'viewers', 'public_index']).then(res => {
       this.contract = res.contract
       this.raws = res.viewers.filter(x => +x.typeFile === 0)
       this.pictures = res.viewers.filter(x => +x.typeFile === 1).map(x => {
