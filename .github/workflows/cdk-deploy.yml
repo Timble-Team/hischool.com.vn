@@ -30,8 +30,11 @@ jobs:
           appId: ${{ secrets.appId }}
           measurementId: ${{ secrets.measurementId }}
 
+      - name: Install Dependencies
+        run: npm install
+
       - name: Build Code
-        run: npm install && npm run build
+        run: npm run build
 
       - name: remove old code
         uses: appleboy/ssh-action@master
