@@ -1,9 +1,9 @@
 
 importScripts(
-  'https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js'
+  'https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js'
 )
 importScripts(
-  'https://www.gstatic.com/firebasejs/7.8.1/firebase-messaging.js'
+  'https://www.gstatic.com/firebasejs/7.15.0/firebase-messaging.js'
 )
 firebase.initializeApp({"apiKey":"AIzaSyDiDRg8T5o1lR5RJdspNpuB10W-zpgrFv0","authDomain":"prod-hischool.firebaseapp.com","databaseURL":"https:\u002F\u002Fprod-hischool.firebaseio.com","projectId":"prod-hischool","storageBucket":"prod-hischool.appspot.com","messagingSenderId":"591828393672","appId":"1:591828393672:web:69ee94c39a85b400108ffd","measurementId":"G-E1QHH6HHQ8"})
 
