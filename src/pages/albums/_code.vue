@@ -2,12 +2,11 @@
   <div class="container">
     <PictureDialog v-show="currentPictureId" :name="currentPictureName" :pictureId="currentPictureId" :pos="currentPicturePos" @closeDialog="closeDialog" @nextPicture="nextPicture" @prevPicture="prevPicture"/>
     <div v-if="contract" class="text-center">
-      <h2>{{contract.group}} - {{contract.school}}</h2>
-      <p>{{contract.town}}</p>
+      <h2>{{contract.group.toUpperCase()}} - {{contract.school}}</h2>
       <p v-show="contract.school_year">Niên Khóa: {{contract.school_year}}</p>
-      <div v-if="raws != null">
+      <div v-if="raws.length > 0">
         <p>Link ảnh gốc </p>
-        <span v-for="(item, index) of raws.drive_link.split(',')" :key="`a-${index}`"><a target="_blank" :href="item" >{{item}}</a><br></span><br>
+        <span v-for="(item, index) of raws" :key="`a-${index}`"><a target="_blank" :href="item.drive_link" >{{item.drive_link}}</a><br></span><br>
       </div>
     </div>
     <h6 class="text-center">PHOTOSHOP ALBUM</h6>
@@ -75,10 +74,10 @@ export default {
     if (this.$route.query.pictureId && this.$route.query.pos && this.$route.query.page >= 0) {
       this.currentPictureId = this.$route.query.pictureId || null
     }
-    api.get(['api', 'viewers', this.$route.params.id]).then(res => {
+    api.get(['api', 'contracts', this.$route.params.id, 'viewers', 'public_index']).then(res => {
       this.contract = res.contract
-      this.raws = res.meta.raw
-      this.pictures = res.meta.pic.map(x => {
+      this.raws = res.viewers.filter(x => +x.typeFile === 0)
+      this.pictures = res.viewers.filter(x => +x.typeFile === 1).map(x => {
         x.pictureId = x.pictureId.split(',')
         x.name = x.name.split(',')
         this.picturesCache.push({
@@ -87,12 +86,13 @@ export default {
         })
         return x
       })
+
       if (this.currentPictureId) {
         this.currentPicturePos = +this.$route.query.pos
         this.currentPicturePName = this.pictures[this.currentPage].name[this.currentPicturePos]
       }
-      this.pages = res.meta.count
-      res.meta.pic.forEach((x, index) => {
+      this.pages = res.viewers.filter(x => +x.typeFile === 1).length
+      res.viewers.filter(x => +x.typeFile === 1).forEach((x, index) => {
         this.picturesHandler[index] = []
       })
       this.loadImagePerTime()

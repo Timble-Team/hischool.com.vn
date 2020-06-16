@@ -96,6 +96,7 @@ module.exports = {
     '@/plugins/vue-inject.js',
     '@/plugins/cool-light-box',
     { src: '@/plugins/slick-slide', ssr: false },
+    { src: '@/plugins/vue-masonry', ssr: false },
     { src: '@/plugins/owl-carousel.js', ssr: false },
     { src: '@/plugins/fb-sdk.js', ssr: false },
     { src: '~plugins/ga.js', mode: 'client' }

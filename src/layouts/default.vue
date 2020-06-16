@@ -10,11 +10,9 @@
     <nuxt />
     <app-footer/>
     <section class="app-controls">
-      <el-tooltip class="item" effect="dark" content="0773420210" placement="left-start">
-        <a class="app-btn phone-btn" rel="nofollow" target="_blank" title="Hotline" href="tel:84773420210">
-          <i class="fa fa-phone" aria-hidden="true"></i>
-        </a>
-      </el-tooltip>
+      <a class="app-btn phone-btn" rel="nofollow" target="_blank" title="Hotline" href="tel:84773420210">
+        <i class="fa fa-phone" aria-hidden="true"></i>
+      </a>
       <a class="app-btn" target="_blank" href="https://www.messenger.com/t/classic.yearbook">
         <i class="fa fa-commenting-o" aria-hidden="true"></i>
       </a>
