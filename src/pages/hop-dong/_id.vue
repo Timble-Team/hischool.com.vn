@@ -144,7 +144,7 @@
               <div class="contact-container">
                 <a :href="'tel:' + item.user.phone"><i class="fa fa-phone" aria-hidden="true"></i></a>
                 <a target="_blank" href="https://www.fb.com/dhquan19"><i class="ti-facebook" aria-hidden="true"></i></a>
-                <a target="_blank" href="https://www.fb.com/dhquan19"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a target="_blank" href="https://www.fb.com/dhquan19"><i class="ti-instagram" aria-hidden="true"></i></a>
               </div>
             </div>
           </div>
@@ -233,6 +233,9 @@
         </div>
       </div>
     </div>
+    <div v-if="contract === null">
+      <h3>Bạn không thể xem hợp đồng này!</h3>
+    </div>
   </div>
 </template>
 <script>
@@ -241,7 +244,7 @@ export default {
   data () {
     return {
       icons: ['ti-star', 'ti-control-record', 'ti-tag', 'ti-wand'],
-      contract: null,
+      contract: undefined,
       budgets: [],
       photographers: [],
       objectKeys: {},
@@ -251,32 +254,35 @@ export default {
   },
   async mounted () {
     const { contract } = await this.$api.get(['contracts', this.$route.params.id])
-    // if (this.secretKey === v.contract.secret_key) {
-    this.contract = contract
-    contract.budgets.forEach(x => {
-      if (x.price) {
-        let obj = {
-          budgetableType: x.budgetable_type,
-          type: x.budget_type,
-          name: x.budgetable.name,
-          quantity: x.quantity,
-          id: x.id,
-          price: x.price,
-          note: x.note,
-          total: x.quantity * x.price,
-        };
-        this.budgets.push(obj);
-      }
-    });
-    this.contract.date_takens.forEach(x => {
-      let a = x.photographer_date_takens.map(y => ({...y, date_taken: x.date_taken}));
-      this.photographers.push(...a);
-    });
-    let plans = []
-    this.contract.date_takens.forEach((dateTaken, index) => {
-      plans.push(...dateTaken.plans.map(plan => ({...plan, icon: this.icons[index]})))
-    })
-    this.plans = plans
+    if (this.$route.query.code === contract.secret_key) {
+      this.contract = contract
+      contract.budgets.forEach(x => {
+        if (x.price) {
+          let obj = {
+            budgetableType: x.budgetable_type,
+            type: x.budget_type,
+            name: x.budgetable.name,
+            quantity: x.quantity,
+            id: x.id,
+            price: x.price,
+            note: x.note,
+            total: x.quantity * x.price,
+          };
+          this.budgets.push(obj);
+        }
+      });
+      this.contract.date_takens.forEach(x => {
+        let a = x.photographer_date_takens.map(y => ({...y, date_taken: x.date_taken}));
+        this.photographers.push(...a);
+      });
+      let plans = []
+      this.contract.date_takens.forEach((dateTaken, index) => {
+        plans.push(...dateTaken.plans.map(plan => ({...plan, icon: this.icons[index]})))
+      })
+      this.plans = plans
+    } else {
+      this.contract = null
+    }
   }
 }
 </script>
