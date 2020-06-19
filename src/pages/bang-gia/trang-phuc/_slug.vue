@@ -61,7 +61,6 @@
 </template>
 
 <script>
-// import { APIService } from '@/helpers/services/api.service'
 import CoverArticle from '@/components/modules/CoverArticle2.vue'
 import Sidebar from '@/common-layouts/sidebar.vue'
 

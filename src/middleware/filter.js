@@ -28,8 +28,8 @@ const filterPlugin = {
     Vue.filter('vnd', function (value) {
       return `${value},000 VND`
     })
-    Vue.filter('dateFormat', function (value) {
-      return format(new Date(value), 'dd MMMM yyyy')
+    Vue.filter('dateFormat', function (value, formatType = 'dd MMMM yyyy') {
+      return format(new Date(value), formatType)
     })
     Vue.filter('smallGoogleImage', function (value) {
       if (screen.width < 415) {

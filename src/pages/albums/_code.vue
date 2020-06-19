@@ -44,9 +44,6 @@
 <script>
 import Pagination from '@/components/partials/Pagination.vue'
 import PictureDialog from '@/components/modules/PictureDialog.vue'
-import { APIService } from '@/helpers/services/api.service'
-
-var api = new APIService()
 
 export default {
   components: {
@@ -74,7 +71,7 @@ export default {
     if (this.$route.query.pictureId && this.$route.query.pos && this.$route.query.page >= 0) {
       this.currentPictureId = this.$route.query.pictureId || null
     }
-    api.get(['contracts', this.$route.params.code, 'viewers', 'public_index']).then(res => {
+    this.$api.get(['contracts', this.$route.params.code, 'viewers', 'public_index']).then(res => {
       this.contract = res.contract
       this.raws = res.viewers.filter(x => +x.typeFile === 0)
       this.pictures = res.viewers.filter(x => +x.typeFile === 1).map(x => {

@@ -100,6 +100,7 @@ module.exports = {
     { src: '@/plugins/vue-masonry', ssr: false },
     { src: '@/plugins/owl-carousel.js', ssr: false },
     { src: '@/plugins/fb-sdk.js', ssr: false },
+    { src: '@/plugins/light-timeline.js', ssr: false },
     { src: '~plugins/ga.js', mode: 'client' }
     // { src: '@/plugins/isotope.js', ssr: false},
   ],

@@ -32,6 +32,7 @@ export class APIService {
         params: options
       })
         .then(resp => {
+          console.log(resp)
           resolve(resp.data)
         })
         .catch(err => {

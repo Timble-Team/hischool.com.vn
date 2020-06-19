@@ -11,9 +11,6 @@
 
 <script>
 import CoverArticle from '@/components/modules/CoverArticle2.vue'
-import { APIService } from '@/helpers/services/api.service'
-
-var api = new APIService()
 
 export default {
   name: 'PriceClothes',

@@ -193,8 +193,6 @@ import SharedBtn from '@/components/partials/SharedBtn.vue'
 import Sidebar from '@/common-layouts/sidebar.vue'
 // import CoverArticleList from '@/components/modules/CoverArticleList.vue'
 import AnimatedNumber from 'animated-number-vue'
-// import { APIService } from '@/helpers/services/api.service'
-// var api = new APIService()
 
 export default {
   name: 'Home',

@@ -44,6 +44,7 @@
     "smoothscroll-polyfill": "^0.4.4",
     "url-polyfill": "^1.1.8",
     "vue-cool-lightbox": "^1.1.0",
+    "vue-light-timeline": "^1.0.3",
     "vue-masonry": "^0.11.8",
     "vue-plyr": "^6.0.4",
     "vue-slick": "^1.1.15",
