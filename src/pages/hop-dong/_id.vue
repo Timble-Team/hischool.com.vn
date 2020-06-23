@@ -65,7 +65,7 @@
               <no-ssr>
                 <light-timeline :items="plans">
                   <template slot="tag" slot-scope="{ item }">
-                    {{item.plan_time | dateFormat('dd MMMM')}}
+                    {{item.plan_time | dateFormat('dd MMMM HH:mm')}}
                   </template>
                   <template slot="symbol" slot-scope="{ item }">
                     <div class="my_icon_class"><i :class="item.icon"></i></div>
