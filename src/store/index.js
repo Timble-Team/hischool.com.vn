@@ -18,6 +18,18 @@ export const state = () => ({
   }
 })
 
+export const getters = {
+  getCategories: state => {
+    return state.categories
+  },
+  getAccessories: state => {
+    return state.accessories
+  },
+  getClothes: (state) => {
+    return state.clothes
+  }
+}
+
 export const mutations = {
   setCategories (state, categories = []) {
     state.categories = categories

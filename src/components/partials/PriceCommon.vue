@@ -182,11 +182,31 @@ export default {
     this.getVideoPrices()
   },
   computed: {
-    clothes () {
-      return this.$store.state.clothes.slice(0, 3)
+    async clothes () {
+      const element = this.$store.getters.getClothes
+      if (element && element.length > 0) {
+        return element.slice(0, 3)
+      } else {
+        const clothesRef = await this.$fireStore.collection('clothes').get()
+        let element = this.$common.convertCollectionRecord(clothesRef).sort((a,b) => (+a.order - +b.order))
+        element = element.map(x => ({
+          ...x,
+          link: x.link ? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
+        }))
+        this.$store.commit('setClothes', element)
+        return element.slice(0, 3)
+      }
     },
-    accessories () {
-      return this.$store.state.accessories.slice(0, 4)
+    async accessories () {
+      const element = this.$store.getters.getAccessories
+      if (element && element.length > 0) {
+        return element.slice(0, 4)
+      } else {
+        const accessoriesRef = await this.$fireStore.collection('accessories').get()
+        let element = this.$common.convertCollectionRecord(accessoriesRef).sort((a,b) => (+a.order - +b.order))
+        this.$store.commit('setAccessories', element)
+        return element.slice(0, 4)
+      }
     }
   },
   methods: {

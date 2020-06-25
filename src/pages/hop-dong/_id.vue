@@ -134,7 +134,7 @@
         <div class="container photo-meta">
           <h3 class="title">Thợ chụp / quay</h3>
           <div class="photographer-list" v-if="photographers.length > 0">
-            <div class="detail-container" v-for="(item, index) of photographers" :key="`b-${index}`">
+            <div class="detail-container" v-for="(item, index) of photographers" :key="`b-${index}`" :style="{opacity: $options.filters.dateFormat(item.date_taken, 'dd/MM') === $options.filters.dateFormat(new Date(), 'dd/MM') ? '1' : '0.5' }">
               <div class="detail">
                 <img src="@/assets/images/photographer.png" alt="Si" class="detail-image">
               </div>

@@ -50,8 +50,16 @@ export default {
     }
   },
   computed: {
-    categories () {
-      return this.$store.state.categories
+    async categories () {
+      const cate = this.$store.getters.getCategories
+      if (cate && cate.length > 0) {
+        return cate
+      } else {
+        const categoriesRef = await this.$fireStore.collection('categories').get()
+        const cate = this.$common.convertCollectionRecord(categoriesRef)
+        this.$store.commit('setCategories', cate)
+        return cate
+      }
     }
   },
   methods: {

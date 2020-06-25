@@ -115,13 +115,24 @@ export default {
     }
   },
   computed: {
-    clothes () {
-      const allClothesWithoutCurrentId = this.$store.state.clothes.filter(x => x.id !== this.routeId)
-      const shuffleClothes = this.$common.shuffle(allClothesWithoutCurrentId)
-      return shuffleClothes.slice(0, 4).map(x => ({
-        ...x,
-        link: x.link? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
-      }))
+    async clothes () {
+      const element = this.$store.getters.getClothes
+      if (element && element.length > 0) {
+        const allClothesWithoutCurrentId = element.filter(x => x.id !== this.routeId)
+        const shuffleClothes = this.$common.shuffle(allClothesWithoutCurrentId)
+        return shuffleClothes.slice(0, 4)
+      } else {
+        const clothesRef = await this.$fireStore.collection('clothes').get()
+        let element = this.$common.convertCollectionRecord(clothesRef).sort((a,b) => (+a.order - +b.order))
+        element = element.map(x => ({
+          ...x,
+          link: x.link ? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
+        }))
+        this.$store.commit('setClothes', element)
+        const allClothesWithoutCurrentId = element.filter(x => x.id !== this.routeId)
+        const shuffleClothes = this.$common.shuffle(allClothesWithoutCurrentId)
+        return shuffleClothes.slice(0, 4)
+      }
     }
   },
   async asyncData ({ app, params }) {

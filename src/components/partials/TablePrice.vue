@@ -33,11 +33,20 @@ export default {
     }
   },
   computed: {
-    clothes () {
-      return this.$store.state.clothes.map(x => ({
-        ...x,
-        link: x.link? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
-      }))
+    async clothes () {
+      const element = this.$store.getters.getClothes
+      if (element && element.length > 0) {
+        return element
+      } else {
+        const clothesRef = await this.$fireStore.collection('clothes').get()
+        let element = this.$common.convertCollectionRecord(clothesRef).sort((a,b) => (+a.order - +b.order))
+        element = element.map(x => ({
+          ...x,
+          link: x.link ? x.link : `/bang-gia/trang-phuc/${this.$options.filters.convertVie(x.name, x.id)}`
+        }))
+        this.$store.commit('setClothes', element)
+        return element
+      }
     }
   }
 }

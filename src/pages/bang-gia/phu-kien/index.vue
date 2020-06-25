@@ -22,8 +22,16 @@ export default {
     }
   },
   computed: {
-    accessories () {
-      return this.$store.state.accessories
+    async accessories () {
+      const element = this.$store.getters.getAccessories
+      if (element && element.length > 0) {
+        return element
+      } else {
+        const accessoriesRef = await this.$fireStore.collection('accessories').get()
+        let element = this.$common.convertCollectionRecord(accessoriesRef).sort((a,b) => (+a.order - +b.order))
+        this.$store.commit('setAccessories', element)
+        return element
+      }
     }
   }
 }

@@ -219,8 +219,9 @@
     outline: none;
   }
   .photographer-container {
+    padding-bottom: 20px;
     position: relative;
-    height: 550px;
+    min-height: 550px;
     background: #f0f0f0;
     .container {
       padding-top: 0;
@@ -284,7 +285,6 @@
       }
     }
     @media(max-width: 450px) {
-      height: 1000px;
       .photographer-list {
         display: block;
         .detail-container {
