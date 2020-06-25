@@ -65,7 +65,7 @@ import CoverArticle from '@/components/modules/CoverArticle2.vue'
 import Sidebar from '@/common-layouts/sidebar.vue'
 
 export default {
-  name: 'PriceClothes',
+  name: 'PriceCloth',
   components: {
     Sidebar,
     CoverArticle
@@ -114,9 +114,10 @@ export default {
       suggestClothes: [],
     }
   },
-  computed: {
+  asyncComputed: {
     async clothes () {
       const element = this.$store.getters.getClothes
+      console.log(element)
       if (element && element.length > 0) {
         const allClothesWithoutCurrentId = element.filter(x => x.id !== this.routeId)
         const shuffleClothes = this.$common.shuffle(allClothesWithoutCurrentId)

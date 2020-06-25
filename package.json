@@ -43,6 +43,7 @@
     "reset-css": "^5.0.1",
     "smoothscroll-polyfill": "^0.4.4",
     "url-polyfill": "^1.1.8",
+    "vue-async-computed": "^3.8.2",
     "vue-cool-lightbox": "^1.1.0",
     "vue-light-timeline": "^1.0.3",
     "vue-masonry": "^0.11.8",

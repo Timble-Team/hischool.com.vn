@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h3 class="title-price text-center">Bảng giá phụ kiện</h3>
-    <div class="row" v-if="accessories.length > 0">
+    <div class="row" v-if="accessories && accessories.length > 0">
       <div class="col-6 col-sm-4 col-lg-3" v-for="(item, index) of accessories" :key="index">
         <Accessory :accessory="item"/>
       </div>
@@ -21,7 +21,7 @@ export default {
     return {
     }
   },
-  computed: {
+  asyncComputed: {
     async accessories () {
       const element = this.$store.getters.getAccessories
       if (element && element.length > 0) {

@@ -181,7 +181,7 @@ export default {
     this.getExtraShootingPrices()
     this.getVideoPrices()
   },
-  computed: {
+  asyncComputed: {
     async clothes () {
       const element = this.$store.getters.getClothes
       if (element && element.length > 0) {

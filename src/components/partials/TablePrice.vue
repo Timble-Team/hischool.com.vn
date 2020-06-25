@@ -32,7 +32,7 @@ export default {
       loading: true
     }
   },
-  computed: {
+  asyncComputed: {
     async clothes () {
       const element = this.$store.getters.getClothes
       if (element && element.length > 0) {

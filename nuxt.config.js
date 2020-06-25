@@ -96,6 +96,7 @@ module.exports = {
     '@/plugins/vue-plyr',
     '@/plugins/vue-inject.js',
     '@/plugins/cool-light-box',
+    '@/plugins/async-computed',
     { src: '@/plugins/slick-slide', ssr: false },
     { src: '@/plugins/vue-masonry', ssr: false },
     { src: '@/plugins/owl-carousel.js', ssr: false },

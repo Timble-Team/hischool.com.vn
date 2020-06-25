@@ -49,7 +49,7 @@ export default {
       type: String
     }
   },
-  computed: {
+  asyncComputed: {
     async categories () {
       const cate = this.$store.getters.getCategories
       if (cate && cate.length > 0) {
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     getCategory(type, kind) {
-      if (this.categories.length > 0) {
+      if (this.categories && this.categories.length > 0) {
         const cat = this.categories.find(x => +x.key === +kind && x.type === type)
         return cat ? cat.name : 'KỈ YẾU'
       }
