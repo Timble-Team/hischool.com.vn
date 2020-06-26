@@ -21,8 +21,18 @@ export default {
   methods: {
     async getPrices () {
       const pricesRef = await this.$fireStore.collection('prices').where('kind', 'in', ['2', '4']).get()
-      this.prices = this.$common.convertCollectionRecord(pricesRef).sort((a,b) => (+a.order - +b.order))
-    }
+      const prices = this.$common.convertCollectionRecord(pricesRef).sort((a,b) => (+a.order - +b.order))
+      prices.forEach(async x => {
+        x.includes = await Promise.all(x.includes.map(async y => {
+          if (typeof y === 'string') {
+            return y
+          } else {
+            return this.$common.convertDocumentRecord(await y.get())
+          }
+        }))
+        this.prices.push(x)
+      })
+    },
   }
 }
 </script>

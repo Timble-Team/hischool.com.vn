@@ -45,16 +45,27 @@
       <small>Gói này tính theo công thức trên</small>
     </template>
     <div class="meta-price">
-      <span v-if="+price.type === 0">Số thợ chụp: sĩ số / 20</span>
+      <span>Số thợ chụp: sĩ số / 20</span>
       <p v-if="price.takenTime">Thời gian: <b>{{price.takenTime}}</b></p>
       <div class="container list-price-rule" :class="height ? 'small-price' : ''">
-        <ul class="normal-ul">
+        <ul class="normal-ul prices-ul">
           <h6>Bao gồm</h6>
-          <li v-for="(item, index) of price.includes" :key="index">
-            <a class="green-color"><i class="fa fa-check-circle-o" aria-hidden="true"></i> {{item}}</a>
+          <li class="price-includes" v-for="(item, index) of price.includes" :key="index">
+            <template v-if="typeof item === 'string'">
+              <a class="green-color"><i class="fa fa-check-circle-o" aria-hidden="true"></i> {{item}}</a>
+            </template>
+            <template v-else>
+              <div class="label-ref">
+                <h4>{{item.name}}</h4>
+                <span>{{item.includes.length}} ưu đãi</span>
+              </div>
+            </template>
             <hr class="line-item">
           </li>
         </ul>
+      </div>
+      <div class="overlay-prices">
+        <a @click="readInfo()" class="btn outline outline-2 black radius-xl">Xem chi tiết</a>
       </div>
     </div>
     <!-- <el-button v-if="!booked"  type="danger" @click="booking({
@@ -71,6 +82,26 @@
       <el-button type="success">✓ Đã book</el-button><br>
       <el-button @click="deleteBooking({id: price.id, type: 0}); booked = false" type="text">Không book nữa click vào đây</el-button>
     </div> -->
+    <el-dialog
+      title="Điều khoản chi tiết"
+      :visible.sync="dialogVisible"
+      width="80%">
+      <h2 class="title">{{price.name}}</h2>
+      <ul class="normal-ul">
+        <h5>Bao gồm</h5>
+        <li class="price-includes" v-for="(item, index) of price.includes" :key="index">
+          <template v-if="typeof item === 'string'">
+            <a class="green-color"><i class="fa fa-check-circle-o" aria-hidden="true"></i> {{item}}</a>
+          </template>
+          <template v-else>
+            <ul class="normal-ul">
+              <h6 class="pt-2">{{item.name}}</h6>
+              <li v-for="(child, index) of item.includes" :key="`c-${index}`">{{child}}</li>
+            </ul>
+          </template>
+        </li>
+      </ul>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -79,7 +110,13 @@ export default {
   data () {
     return {
       colorArr: ['#ffa534', '#fb404b', '#ff9510', '#cc2127', '#248cc9', '#4ec6f8'],
-      booked: false
+      booked: false,
+      dialogVisible: false
+    }
+  },
+  methods: {
+    readInfo() {
+      this.dialogVisible = true
     }
   }
 }
@@ -117,14 +154,14 @@ export default {
 }
 .list-price-rule {
   padding-top: 30px;
-  height: 561px;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .small-price {
-  height: 450px;
+  height: 550px;
 }
 
 .el-button {
@@ -175,4 +212,10 @@ export default {
 .f-20 {
   font-size: 20px;
 }
+.label-ref {
+  padding: 40px 20px;
+  border-radius: 5px;
+  background-color: beige;
+}
+
 </style>
