@@ -11,6 +11,7 @@
       <h2 class="title">{{price.name}}</h2>
       <p v-if="+price.type == 0">Áp dụng theo sĩ số</p>
       <p v-if="+price.type == 1">Không giới hạn sĩ số</p>
+      <p v-if="+price.type == 2">Áp dụng công thức</p>
     </div>
     <div v-if="+price.type == 0" class="price-holder">
       <div>
@@ -22,6 +23,7 @@
         </template>
         <template v-else>
           <b class="price-num">{{price.priceFirst}}<sup>K</sup>
+          <span><i class="f-20 ti-close"></i></span>
           <span><i class="ti-user"></i></span></b>
         </template>
       </div>
@@ -31,6 +33,16 @@
         <b class="price-num">{{price.priceFirst}}<sup>K</sup></b><br>
       </div>
       <small>Gói này ko tính theo sĩ số</small>
+    </template>
+    <template v-if="price.type == 2">
+      <div class="price-holder">
+        <b class="price-num">{{price.priceFirst}}<sup>K</sup>
+        <span><i class="f-20 ti-close"></i></span>
+        <span><i class="ti-user"></i></span>
+        <span><i class="f-20 ti-plus pr-2"></i></span>{{price.price}}<sup>K</sup>
+        </b>
+      </div>
+      <small>Gói này tính theo công thức trên</small>
     </template>
     <div class="meta-price">
       <span v-if="+price.type === 0">Số thợ chụp: sĩ số / 20</span>
@@ -112,7 +124,7 @@ export default {
 }
 
 .small-price {
-  height: 340px;
+  height: 450px;
 }
 
 .el-button {
@@ -159,5 +171,8 @@ export default {
 }
 .ti-user {
   color: grey;
+}
+.f-20 {
+  font-size: 20px;
 }
 </style>
