@@ -79,6 +79,7 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Inconsolata:400,700|Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i|Maven+Pro:400,500,700,900|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' }
     ],
     script: [
+      { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", 'data-ad-client': "ca-pub-9316210716207571", async: true },
       { src: 'https://use.fontawesome.com/ce16520130.js', defer: true  },
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js' },
       // { src: 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=884618848377974&autoLogAppEvents=1', crossorigin: 'anonymous', defer: true, async: true  },
