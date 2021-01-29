@@ -9,7 +9,7 @@
             </div>
             <div class="category-info">
               <div class="category-style"><a href="javascript:void(0);">{{cate.subTitle}}</a></div>
-              <h1><router-link :to="{path: cate.path}">{{cate.title}}</router-link></h1>
+              <h1 @click="fireEvent()"><router-link :to="{path: cate.path}">{{cate.title}}</router-link></h1>
               <router-link class="category-title" :to="{path: cate.path}"><i class="la la-arrow-right"></i></router-link>
             </div>
           </div>
@@ -24,6 +24,17 @@ export default {
   name: 'Category',
   props: ['categories'],
   mounted () {
+  },
+  methods: {
+    fireEvent() {
+      console.log(123123);
+      this.$ga.event({
+        eventCategory: 'category',
+        eventAction: 'action',
+        eventLabel: 'label',
+        eventValue: 123
+      })
+    }
   }
 }
 </script>

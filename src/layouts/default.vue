@@ -37,6 +37,7 @@ export default {
     }
   },
   mounted() {
+    this.$ga.page(this.$router)
   },
   computed: {
     items() {

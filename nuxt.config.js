@@ -104,7 +104,7 @@ module.exports = {
     { src: '@/plugins/owl-carousel.js', ssr: false },
     { src: '@/plugins/fb-sdk.js', ssr: false },
     { src: '@/plugins/light-timeline.js', ssr: false },
-    { src: '~plugins/ga.js', mode: 'client' }
+    // { src: '~plugins/ga.js', mode: 'client' }
     // { src: '@/plugins/isotope.js', ssr: false},
   ],
   /*
@@ -125,7 +125,8 @@ module.exports = {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/google-analytics'
   ],
   /*
   ** Nuxt.js modules
@@ -135,6 +136,9 @@ module.exports = {
     'nuxt-polyfill',
     '@nuxtjs/firebase',
   ],
+  googleAnalytics: {
+    id: 'UA-168784079-1'
+  },
   firebase: {
     config: {
       apiKey: process.env.apiKey,
