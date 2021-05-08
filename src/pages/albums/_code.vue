@@ -2,8 +2,8 @@
   <div class="container">
     <PictureDialog v-show="currentPictureId" :name="currentPictureName" :pictureId="currentPictureId" :pos="currentPicturePos" @closeDialog="closeDialog" @nextPicture="nextPicture" @prevPicture="prevPicture"/>
     <div v-if="contract" class="text-center">
-      <h2>{{contract.group.toUpperCase()}} - {{contract.school}}</h2>
-      <p v-show="contract.school_year">Niên Khóa: {{contract.school_year}}</p>
+      <h2>{{contract.name}}</h2>
+      <p v-show="contract.label">Niên Khóa: {{contract.label}}</p>
       <div v-if="raws.length > 0">
         <p>Link ảnh gốc </p>
         <span v-for="(item, index) of raws" :key="`a-${index}`"><a target="_blank" :href="item.drive_link" >{{item.drive_link}}</a><br></span><br>
@@ -73,6 +73,7 @@ export default {
     }
     this.$api.get(['contracts', this.$route.params.code, 'viewers', 'public_index']).then(res => {
       this.contract = res.contract
+      console.log(123, this.contract);
       this.raws = res.viewers.filter(x => +x.typeFile === 0)
       this.pictures = res.viewers.filter(x => +x.typeFile === 1).map(x => {
         x.pictureId = x.pictureId.split(',')
